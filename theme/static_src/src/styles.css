@@ -14,13 +14,13 @@
      COLORS
      ============================================================ */
   /* Brand */
-  --color-cay-primary: #05162D;
-  --color-cay-primary-soft: #EDF1F7; /* light wash of cay-primary */
-  --color-cay-secondary: #D19611;
-  --color-cay-secondary-soft: #FBF1DC; /* light wash of cay-secondary */
-  --color-cay-accent: #45536D;
-  --color-cay-neutral: #E9D0AE;
-  --color-cay-light: #F2F3F8;
+  --color-cay-primary: #05162d;
+  --color-cay-primary-soft: #edf1f7; /* light wash of cay-primary */
+  --color-cay-secondary: #d19611;
+  --color-cay-secondary-soft: #fbf1dc; /* light wash of cay-secondary */
+  --color-cay-accent: #45536d;
+  --color-cay-neutral: #e9d0ae;
+  --color-cay-light: #f2f3f8;
 
   /* School accents */
   --color-accent-gold: #f5b700;
@@ -69,10 +69,10 @@
   --shadow-sm: 0 2px 0 0 rgb(5 22 45 / 0.05);
   --shadow-md: 0 4px 0 0 rgb(5 22 45 / 0.06);
   --shadow-lg: 0 6px 0 0 rgb(5 22 45 / 0.08);
-  --shadow-hard-sm: 2px 2px 0 0 #05162D;
-  --shadow-hard: 4px 4px 0 0 #05162D;
-  --shadow-hard-lg: 6px 6px 0 0 #05162D;
-  --shadow-hard-brand: 4px 4px 0 0 #D19611; /* gold accent offset */
+  --shadow-hard-sm: 2px 2px 0 0 #05162d;
+  --shadow-hard: 4px 4px 0 0 #05162d;
+  --shadow-hard-lg: 6px 6px 0 0 #05162d;
+  --shadow-hard-brand: 4px 4px 0 0 #d19611; /* gold accent offset */
 
   /* ============================================================
      FONTS
@@ -418,5 +418,247 @@
   /* ---------- Danger zone ---------- */
   .danger-zone {
     @apply border border-error/30 bg-error-soft p-6;
+  }
+
+  /* ==========================================
+       HERO
+    ========================================== */
+  .hero-section {
+    background:
+      radial-gradient(
+        ellipse at 78% 48%,
+        rgba(209, 150, 17, 0.09),
+        transparent 38%
+      ),
+      url("../../images/bg-stripe.jpeg"), var(--color-cay-primary);
+    background-size: cover;
+    background-position: center;
+  }
+  .gold-highlight {
+    color: var(--color-cay-secondary);
+  }
+
+  /* ==========================================
+   TRUCK ANIMATION
+   ========================================== */
+  .truck {
+    animation: truckFloat 5s ease-in-out infinite;
+  }
+
+  .truck-wheels {
+    /* Spin each wheel around its own axle, not the SVG viewBox center */
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wheelSpin 5s linear infinite;
+  }
+
+  /* Optional: give the front wheel the opposite feel / speed */
+  .truck-wheels:last-of-type {
+    animation-duration: 3.2s;
+  }
+
+  .truck-trail {
+    animation: trailPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes truckFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes wheelSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes trailPulse {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  /* ==========================================
+       BUTTONS — consistent sharp corners, generous padding
+    ========================================== */
+  .gold-button {
+    background: var(--color-cay-secondary);
+    color: var(--color-cay-primary);
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .gold-button:hover {
+    background: var(--color-cay-secondary-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(209, 150, 17, 0.22);
+  }
+
+  .outline-button {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    transition:
+      border-color 0.25s ease,
+      color 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .outline-button:hover {
+    border-color: var(--color-cay-secondary-soft);
+    color: var(--color-cay-secondary-soft);
+    background: rgba(230, 174, 45, 0.06);
+  }
+
+  /* ==========================================
+       SERVICE CARDS
+    ========================================== */
+  .service-card {
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-cay-secondary);
+    box-shadow: 0 18px 40px rgba(5, 22, 45, 0.1);
+  }
+
+  /* ==========================================
+       FAQ
+    ========================================== */
+  .faq-answer {
+    animation: faqReveal 0.25s ease;
+  }
+
+  @keyframes faqReveal {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .truck,
+    .truck-wheels,
+    .truck-trail {
+      animation: none !important;
+    }
+
+    .service-card,
+    .gold-button,
+    .outline-button {
+      transition: none;
+    }
+
+    .service-card:hover,
+    .gold-button:hover {
+      transform: none;
+    }
+  }
+  /* ---------- Service picker pills ---------- */
+  .service-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+    border: 2px solid var(--color-neutral-300);
+    background: #ffffff;
+    color: var(--color-neutral-600);
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .service-pill:hover {
+    border-color: var(--color-cay-primary);
+    color: var(--color-cay-primary);
+    background: var(--color-cay-primary-soft);
+  }
+  .service-pill[aria-pressed="true"] {
+    background: var(--color-cay-secondary);
+    border-color: var(--color-cay-secondary);
+    color: var(--color-cay-primary);
+  }
+  .service-pill[aria-pressed="true"]:hover {
+    background: var(--color-cay-neutral);
+    border-color: var(--color-cay-neutral);
+  }
+  .service-pill:focus-visible {
+    outline: 2px solid var(--color-cay-primary);
+    outline-offset: 2px;
+  }
+
+  .service-pill__indicator {
+    transition: opacity 0.15s ease;
+  }
+  .service-pill__plus {
+    opacity: 1;
+  }
+  .service-pill__check {
+    opacity: 0;
+  }
+  .service-pill[aria-pressed="true"] .service-pill__plus {
+    opacity: 0;
+  }
+  .service-pill[aria-pressed="true"] .service-pill__check {
+    opacity: 1;
+  }
+
+  .service-pill__price {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-left: 0.25rem;
+  }
+
+  /* ---------- Service card reveal ---------- */
+  [data-service][hidden] {
+    display: none !important;
+  }
+  @keyframes cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  [data-service]:not([hidden]) {
+    animation: cardIn 0.2s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-pill {
+      transition: none;
+    }
+    [data-service]:not([hidden]) {
+      animation: none;
+    }
   }
 }

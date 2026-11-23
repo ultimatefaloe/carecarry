@@ -1,142 +1,6 @@
 {% extends "root-layout.html" %}
-{% load static %}
 
 {% block title %}Home{% endblock title %}
-
-{% block extra_css %}
-<style>
-    /* ==========================================
-       BRAND TOKENS
-    ========================================== */
-    :root {
-        --cay-navy: #05162D;
-        --cay-navy-soft: #0A203A;
-        --cay-gold: #D19611;
-        --cay-gold-light: #E6AE2D;
-        --cay-gold-deep: #916508;
-        --cay-cream: #F7F5F0;
-    }
-
-    /* ==========================================
-       HERO
-    ========================================== */
-    .hero-section {
-        background:
-            radial-gradient(ellipse at 78% 48%, rgba(209, 150, 17, .09), transparent 38%),
-            var(--cay-navy);
-    }
-
-    .gold-highlight {
-        color: var(--cay-gold);
-    }
-
-    /* ==========================================
-       TRUCK ANIMATION
-    ========================================== */
-    .truck {
-        animation: truckFloat 5s ease-in-out infinite;
-    }
-
-    .truck-wheels {
-        transform-origin: center;
-        animation: wheelSpin 5s linear infinite;
-    }
-
-    .truck-trail {
-        animation: trailPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes truckFloat {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
-    }
-
-    @keyframes wheelSpin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
-    @keyframes trailPulse {
-        0%, 100% { opacity: .25; }
-        50% { opacity: .8; }
-    }
-
-    /* ==========================================
-       BUTTONS — consistent sharp corners, generous padding
-    ========================================== */
-    .gold-button {
-        background: var(--cay-gold);
-        color: var(--cay-navy);
-        transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
-    }
-
-    .gold-button:hover {
-        background: var(--cay-gold-light);
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(209, 150, 17, .22);
-    }
-
-    .outline-button {
-        border: 1px solid rgba(255, 255, 255, .5);
-        color: #FFFFFF;
-        transition: border-color .25s ease, color .25s ease, background .25s ease;
-    }
-
-    .outline-button:hover {
-        border-color: var(--cay-gold-light);
-        color: var(--cay-gold-light);
-        background: rgba(230, 174, 45, .06);
-    }
-
-    /* ==========================================
-       SERVICE CARDS
-    ========================================== */
-    .service-card {
-        transition:
-            transform .3s ease,
-            border-color .3s ease,
-            box-shadow .3s ease;
-    }
-
-    .service-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--cay-gold);
-        box-shadow: 0 18px 40px rgba(5, 22, 45, .10);
-    }
-
-    /* ==========================================
-       FAQ
-    ========================================== */
-    .faq-answer {
-        animation: faqReveal .25s ease;
-    }
-
-    @keyframes faqReveal {
-        from { opacity: 0; transform: translateY(-5px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .truck,
-        .truck-wheels,
-        .truck-trail {
-            animation: none !important;
-        }
-
-        .service-card,
-        .gold-button,
-        .outline-button {
-            transition: none;
-        }
-
-        .service-card:hover,
-        .gold-button:hover {
-            transform: none;
-        }
-    }
-</style>
-{% endblock extra_css %}
-
 
 {% block content %}
 
@@ -147,13 +11,12 @@
 
     <div class="page-container grid min-h-[600px] items-center gap-14 px-6 py-20 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:py-28">
 
-        <!-- HERO CONTENT -->
         <div class="relative z-10 max-w-2xl">
 
             <div class="mb-8 flex items-center gap-4">
                 <span class="h-px w-12 bg-[#E6AE2D]"></span>
                 <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
-                    Moving Made Easier
+                    Moving Help, Booked by the Hour
                 </span>
             </div>
 
@@ -165,9 +28,9 @@
             </h1>
 
             <p class="mt-8 max-w-lg text-sm leading-8 text-slate-300 sm:text-base">
-                Moving doesn't have to be overwhelming.
-                CareCarry helps make your moving experience
-                simpler, smoother and more convenient.
+                Book vetted local helpers to load, unload, pack or clean.
+                Choose your date, crew size and hours — and pay only for
+                the time you actually need.
             </p>
 
             <div class="mt-10 flex flex-wrap items-center gap-5">
@@ -189,10 +52,10 @@
 
                 <div>
                     <p class="font-display text-sm font-semibold text-white">
-                        Thoughtful Support
+                        2‑Hour Minimum
                     </p>
                     <p class="mt-1.5 text-xs text-slate-300">
-                        Help throughout your move
+                        Pay only for the hours you book
                     </p>
                 </div>
 
@@ -200,10 +63,10 @@
 
                 <div>
                     <p class="font-display text-sm font-semibold text-white">
-                        Less Moving Stress
+                        You Supply the Truck
                     </p>
                     <p class="mt-1.5 text-xs text-slate-300">
-                        A smoother experience
+                        We supply the people
                     </p>
                 </div>
 
@@ -212,7 +75,7 @@
         </div>
 
 
-        <!-- TRUCK ILLUSTRATION -->
+        <!-- TRUCK ILLUSTRATION (unchanged) -->
         <div class="relative mx-auto w-full max-w-[540px]">
 
             <div class="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cay-secondary/10 blur-[90px]"></div>
@@ -223,77 +86,39 @@
                  role="img"
                  aria-label="Illustration of a moving truck">
 
-                <ellipse cx="320" cy="330" rx="230" ry="22"
-                         fill="#000000" opacity=".25"/>
-
-                <path d="M35 320H585"
-                      stroke="#D19611"
-                      stroke-opacity=".35"
-                      stroke-width="2"/>
-
+                <ellipse cx="320" cy="330" rx="230" ry="22" fill="#000000" opacity=".25"/>
+                <path d="M35 320H585" stroke="#D19611" stroke-opacity=".35" stroke-width="2"/>
                 <path d="M91 105H365V286H91V105Z" fill="#E9EDF2"/>
                 <path d="M91 105H365V128H91V105Z" fill="#D19611"/>
                 <path d="M104 139H350V270H104V139Z" fill="#F7F8FA"/>
-
-                <path d="M122 153V257M338 153V257"
-                      stroke="#D8DDE4" stroke-width="3"/>
-
-                <path d="M135 153H324"
-                      stroke="#D8DDE4" stroke-width="2"/>
-
-                <path d="M365 160H435L505 226V286H365V160Z"
-                      fill="#D19611"/>
-
-                <path d="M382 174H428L475 222H382V174Z"
-                      fill="#0C2A4B"/>
-
-                <path d="M391 182H424L456 214H391V182Z"
-                      fill="#B8D2E7"/>
-
-                <path d="M391 182V214"
-                      stroke="#DCEAF5" stroke-width="2"/>
-
-                <path d="M365 244H505V286H365V244Z"
-                      fill="#B47B0C"/>
-
-                <path d="M475 244H505V286H475V244Z"
-                      fill="#E6AE2D"/>
-
+                <path d="M122 153V257M338 153V257" stroke="#D8DDE4" stroke-width="3"/>
+                <path d="M135 153H324" stroke="#D8DDE4" stroke-width="2"/>
+                <path d="M365 160H435L505 226V286H365V160Z" fill="#D19611"/>
+                <path d="M382 174H428L475 222H382V174Z" fill="#0C2A4B"/>
+                <path d="M391 182H424L456 214H391V182Z" fill="#B8D2E7"/>
+                <path d="M391 182V214" stroke="#DCEAF5" stroke-width="2"/>
+                <path d="M365 244H505V286H365V244Z" fill="#B47B0C"/>
+                <path d="M475 244H505V286H475V244Z" fill="#E6AE2D"/>
                 <path d="M484 278H520V294H484Z" fill="#DCE2E9"/>
                 <path d="M84 278H113V294H84Z" fill="#DCE2E9"/>
-
-                <rect x="495" y="247" width="12" height="17"
-                      rx="2" fill="#FFF0BC"/>
-
-                <path d="M182 174L225 151L268 174V221L225 245L182 221V174Z"
-                      fill="#05162D"/>
-
-                <path d="M225 151V197M182 174L225 197L268 174M225 197V245"
-                      stroke="#D19611" stroke-width="2.5"/>
-
+                <rect x="495" y="247" width="12" height="17" rx="2" fill="#FFF0BC"/>
+                <path d="M182 174L225 151L268 174V221L225 245L182 221V174Z" fill="#05162D"/>
+                <path d="M225 151V197M182 174L225 197L268 174M225 197V245" stroke="#D19611" stroke-width="2.5"/>
                 <g class="truck-wheels">
                     <circle cx="171" cy="289" r="31" fill="#101923"/>
                     <circle cx="171" cy="289" r="17" fill="#B8C1CC"/>
                     <circle cx="171" cy="289" r="7" fill="#39495B"/>
-                    <path d="M171 272V306M154 289H188M159 277L183 301M183 277L159 301"
-                          stroke="#64748B" stroke-width="2"/>
+                    <path d="M171 272V306M154 289H188M159 277L183 301M183 277L159 301" stroke="#64748B" stroke-width="2"/>
                 </g>
-
                 <g class="truck-wheels">
                     <circle cx="438" cy="289" r="31" fill="#101923"/>
                     <circle cx="438" cy="289" r="17" fill="#B8C1CC"/>
                     <circle cx="438" cy="289" r="7" fill="#39495B"/>
-                    <path d="M438 272V306M421 289H455M426 277L450 301M450 277L426 301"
-                          stroke="#64748B" stroke-width="2"/>
+                    <path d="M438 272V306M421 289H455M426 277L450 301M450 277L426 301" stroke="#64748B" stroke-width="2"/>
                 </g>
-
                 <g class="truck-trail">
-                    <path d="M43 242H80M58 256H80"
-                          stroke="#D19611"
-                          stroke-width="2"
-                          stroke-linecap="round"/>
+                    <path d="M43 242H80M58 256H80" stroke="#D19611" stroke-width="2" stroke-linecap="round"/>
                 </g>
-
             </svg>
 
             <div class="absolute bottom-[3%] right-[5%] border border-cay-secondary/30 bg-[#05162D] px-5 py-3">
@@ -311,6 +136,31 @@
 
     <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
 
+</section>
+
+
+<!-- ==========================================
+     PRICE STRIP
+=========================================== -->
+<section class="border-b border-neutral-200 bg-white">
+    <div class="page-container grid grid-cols-2 divide-x divide-y divide-neutral-200 sm:grid-cols-4 sm:divide-y-0">
+        <div class="px-5 py-7 text-center">
+            <p class="font-display text-2xl font-semibold text-cay-primary">$175<span class="text-sm font-medium text-neutral-500">/hr</span></p>
+            <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">2 Helpers</p>
+        </div>
+        <div class="px-5 py-7 text-center">
+            <p class="font-display text-2xl font-semibold text-cay-primary">2 hrs</p>
+            <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">Minimum Booking</p>
+        </div>
+        <div class="px-5 py-7 text-center">
+            <p class="font-display text-2xl font-semibold text-cay-primary">$150</p>
+            <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">Per Gun Safe</p>
+        </div>
+        <div class="px-5 py-7 text-center">
+            <p class="font-display text-2xl font-semibold text-cay-primary">7 days</p>
+            <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-neutral-500">A Week Availability</p>
+        </div>
+    </div>
 </section>
 
 
@@ -336,12 +186,13 @@
             <p class="text-sm leading-8 text-cay-primary/70 sm:text-base">
                 Every move comes with details to manage, things to organise
                 and decisions to make. CareCarry exists to make that process
-                easier by providing moving assistance with care and attention.
+                easier by providing moving assistance with care and attention —
+                booked by the hour, on your schedule.
             </p>
 
-            <a href="#services"
+            <a href="/book/"
                class="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-cay-primary transition hover:gap-4 hover:text-[#916508]">
-                Discover our services
+                Build your quote
                 <span aria-hidden="true">→</span>
             </a>
         </div>
@@ -358,7 +209,6 @@
 
     <div class="page-container">
 
-        <!-- SECTION HEADER -->
         <div class="flex flex-col justify-between gap-10 sm:flex-row sm:items-end">
 
             <div class="max-w-xl">
@@ -372,7 +222,7 @@
                 </h2>
 
                 <p class="mt-6 text-sm leading-8 text-cay-primary/65">
-                    Explore the assistance available to make your next move easier.
+                    Pick the services you need and book them together in one quote.
                 </p>
             </div>
 
@@ -384,84 +234,108 @@
         </div>
 
 
-        <!-- CARDS GRID -->
-        <div class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+        <div class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
 
-            <!-- SERVICE 1 -->
-            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
-
-                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
-                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
-                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M3 10.5L12 3l9 7.5M5.5 9v11h13V9M9 20v-6h6v6"/>
+            <!-- LOAD / UNLOAD -->
+            <article class="service-card flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+                <div class="flex h-14 w-14 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 17h18M5 17V8h14v9M8 8V5h8v3M7 17v2m10-2v2M8 12h8"/>
                     </svg>
                 </div>
 
-                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
-                    Moving Assistance
+                <span class="mt-8 inline-flex w-fit border border-cay-primary/30 bg-cay-primary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cay-primary">
+                    From $175/hr
+                </span>
+
+                <h3 class="mt-4 font-display text-lg font-semibold text-cay-primary">
+                    Load / Unload
                 </h3>
 
-                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
-                    Support with the tasks involved in making your move from one place to another.
+                <p class="mt-3 flex-1 text-sm leading-7 text-cay-primary/65">
+                    Helpers to load your rental truck or unload at the destination.
                 </p>
 
-                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
-                    Learn more <span aria-hidden="true">→</span>
+                <a href="/book/" class="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Book <span aria-hidden="true">→</span>
                 </a>
-
             </article>
 
-
-            <!-- SERVICE 2 -->
-            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
-
-                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
-                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
-                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M4 7l8-4 8 4-8 4-8-4ZM4 7v10l8 4 8-4V7M12 11v10M8 5l8 4"/>
+            <!-- PACK / UNPACK -->
+            <article class="service-card flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+                <div class="flex h-14 w-14 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7l8-4 8 4-8 4-8-4ZM4 7v10l8 4 8-4V7M12 11v10M8 5l8 4"/>
                     </svg>
                 </div>
 
-                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
-                    Packing Support
+                <span class="mt-8 inline-flex w-fit border border-cay-primary/30 bg-cay-primary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cay-primary">
+                    From $175/hr
+                </span>
+
+                <h3 class="mt-4 font-display text-lg font-semibold text-cay-primary">
+                    Pack / Unpack
                 </h3>
 
-                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
-                    Assistance with organising and preparing belongings for a move.
+                <p class="mt-3 flex-1 text-sm leading-7 text-cay-primary/65">
+                    Helpers to box up your belongings — or unpack them at the new place.
                 </p>
 
-                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
-                    Learn more <span aria-hidden="true">→</span>
+                <a href="/book/" class="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Book <span aria-hidden="true">→</span>
                 </a>
-
             </article>
 
-
-            <!-- SERVICE 3 -->
-            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)] sm:col-span-2 lg:col-span-1">
-
-                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
-                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
-                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M3 17h18M5 17V8h14v9M8 8V5h8v3M7 17v2m10-2v2M8 12h8"/>
+            <!-- CLEANING -->
+            <article class="service-card flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+                <div class="flex h-14 w-14 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 20l6-6M8 16l-3-3 4-4 3 3-4 4ZM14 4l1.5 3L19 8.5 15.5 10 14 13l-1.5-3L9 8.5 12.5 7 14 4Z"/>
                     </svg>
                 </div>
 
-                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
-                    Loading & Unloading
+                <span class="mt-8 inline-flex w-fit border border-cay-primary/30 bg-cay-primary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cay-primary">
+                    From $95/hr
+                </span>
+
+                <h3 class="mt-4 font-display text-lg font-semibold text-cay-primary">
+                    Cleaning Help
                 </h3>
 
-                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
-                    Help with handling and moving belongings during the moving process.
+                <p class="mt-3 flex-1 text-sm leading-7 text-cay-primary/65">
+                    Maid and cleaning services for the home you're leaving or moving into.
                 </p>
 
-                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
-                    Learn more <span aria-hidden="true">→</span>
+                <a href="/book/" class="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Book <span aria-hidden="true">→</span>
                 </a>
+            </article>
 
+            <!-- GUN SAFE -->
+            <article class="service-card flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+                <div class="flex h-14 w-14 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <rect x="4" y="4" width="16" height="16" rx="1"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path stroke-linecap="round" d="M12 9v-.5M12 15.5V15M9 12h-.5M15.5 12H15"/>
+                    </svg>
+                </div>
+
+                <span class="mt-8 inline-flex w-fit border border-cay-secondary/40 bg-cay-secondary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cay-secondary">
+                    $150 / safe
+                </span>
+
+                <h3 class="mt-4 font-display text-lg font-semibold text-cay-primary">
+                    Gun Safe Fee
+                </h3>
+
+                <p class="mt-3 flex-1 text-sm leading-7 text-cay-primary/65">
+                    Specialty handling for gun safes. Charged per safe, added to your quote.
+                </p>
+
+                <a href="/book/" class="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Book <span aria-hidden="true">→</span>
+                </a>
             </article>
 
         </div>
@@ -490,7 +364,7 @@
             </h2>
 
             <p class="mt-5 text-sm leading-7 text-cay-primary/65">
-                A straightforward process to help you get moving.
+                Build your quote, pick a date, and we'll handle the rest.
             </p>
 
         </div>
@@ -500,25 +374,25 @@
 
             <div class="border-t-2 border-cay-secondary/40 pt-8">
                 <span class="font-display text-4xl font-bold text-cay-secondary">01</span>
-                <h3 class="mt-6 font-display text-lg font-semibold">Make an Enquiry</h3>
+                <h3 class="mt-6 font-display text-lg font-semibold">Choose Your Services</h3>
                 <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    Tell us about your move and the kind of assistance you need.
+                    Select load/unload, pack/unpack, cleaning, or a gun safe move.
                 </p>
             </div>
 
             <div class="border-t-2 border-cay-secondary/40 pt-8">
                 <span class="font-display text-4xl font-bold text-cay-secondary">02</span>
-                <h3 class="mt-6 font-display text-lg font-semibold">Share Your Details</h3>
+                <h3 class="mt-6 font-display text-lg font-semibold">Pick Date, Time &amp; Crew</h3>
                 <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    Provide your moving locations, preferred date and other relevant details.
+                    Choose how many helpers you need and for how many hours.
                 </p>
             </div>
 
             <div class="border-t-2 border-cay-secondary/40 pt-8">
                 <span class="font-display text-4xl font-bold text-cay-secondary">03</span>
-                <h3 class="mt-6 font-display text-lg font-semibold">Discuss Your Move</h3>
+                <h3 class="mt-6 font-display text-lg font-semibold">Review Your Quote</h3>
                 <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    Discuss the assistance required and the arrangements for your move.
+                    See the total before you commit — no hidden fees.
                 </p>
             </div>
 
@@ -526,7 +400,7 @@
                 <span class="font-display text-4xl font-bold text-cay-secondary">04</span>
                 <h3 class="mt-6 font-display text-lg font-semibold">Get Moving</h3>
                 <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    Move forward with the agreed arrangements and support.
+                    Your crew shows up on the day. You supply the truck.
                 </p>
             </div>
 
@@ -545,7 +419,6 @@
     <div class="page-container grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
 
         <div>
-
             <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
                 Why CareCarry
             </span>
@@ -560,46 +433,29 @@
                 attention and consideration. Our focus is on making the
                 experience easier for the people we serve.
             </p>
-
         </div>
 
 
         <div class="grid gap-10 sm:grid-cols-2">
 
             <div class="border-l-2 border-cay-secondary pl-6">
-                <h3 class="font-display text-base font-semibold text-cay-primary">
-                    Customer Focus
-                </h3>
-                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
-                    Understanding each customer's moving needs.
-                </p>
+                <h3 class="font-display text-base font-semibold text-cay-primary">Transparent Pricing</h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">Hourly rates and a live quote — you always see the total first.</p>
             </div>
 
             <div class="border-l-2 border-cay-secondary pl-6">
-                <h3 class="font-display text-base font-semibold text-cay-primary">
-                    Organisation
-                </h3>
-                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
-                    Giving attention to the details involved in moving.
-                </p>
+                <h3 class="font-display text-base font-semibold text-cay-primary">Flexible Booking</h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">Book only the hours and crew size your move actually needs.</p>
             </div>
 
             <div class="border-l-2 border-cay-secondary pl-6">
-                <h3 class="font-display text-base font-semibold text-cay-primary">
-                    Convenience
-                </h3>
-                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
-                    Helping simplify the moving process.
-                </p>
+                <h3 class="font-display text-base font-semibold text-cay-primary">One Quote, Many Services</h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">Load, pack, clean and safe-moving all in a single appointment.</p>
             </div>
 
             <div class="border-l-2 border-cay-secondary pl-6">
-                <h3 class="font-display text-base font-semibold text-cay-primary">
-                    Thoughtful Service
-                </h3>
-                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
-                    Approaching every move with care and attention.
-                </p>
+                <h3 class="font-display text-base font-semibold text-cay-primary">Thoughtful Service</h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">Approaching every move with care and attention.</p>
             </div>
 
         </div>
@@ -644,37 +500,47 @@
                     <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
-                    CareCarry provides moving assistance. The available services can be discussed when making an enquiry.
+                    We offer Load/Unload, Pack/Unpack, Cleaning Help / Maid Services, and a Gun Safe Fee for specialty handling. You can combine any of these in a single booking.
                 </p>
             </details>
 
             <details class="group py-8">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
-                    How do I request moving assistance?
+                    Do you provide a moving truck?
                     <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
-                    Use the Book a Move page to share your details and describe the assistance you need.
+                    No. Moving Helpers do not provide moving trucks or supplies. You'll need to arrange your own rental truck, van, or trailer.
                 </p>
             </details>
 
             <details class="group py-8">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
-                    Can I discuss my moving requirements first?
+                    How does pricing work?
                     <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
-                    Yes. You can make an enquiry and discuss your requirements before finalising arrangements.
+                    Helpers are billed by the hour with a 2‑hour minimum. Two helpers cost $175/hr, three helpers $255/hr, and four helpers $335/hr. Cleaning starts at $95/hr. Gun safe handling is a flat $150 per safe.
                 </p>
             </details>
 
             <details class="group py-8">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
-                    How do I get a quote?
+                    What is Safeload℠ Coverage?
                     <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
-                    Submit your moving details through the enquiry page so the team can discuss your request.
+                    Safeload is optional coverage you can add per service. Plans start at $14.99 for $2,500 of coverage and scale up to $39.99 for $10,000.
+                </p>
+            </details>
+
+            <details class="group py-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
+                    Can I change my booking after I submit it?
+                    <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
+                    Yes. Reach out via the contact details on your confirmation and we'll adjust the date, time, crew size, or hours as availability allows.
                 </p>
             </details>
 
@@ -705,7 +571,7 @@
             </h2>
 
             <p class="mt-6 max-w-xl text-sm leading-7 text-slate-300">
-                Tell us what you need and take the first step towards a smoother move.
+                Build your quote in under a minute. Pay only for the hours you book.
             </p>
         </div>
 
