@@ -9,10 +9,10 @@
     <meta name="description" content="CareCarry makes moving easier with convenient moving assistance.">
     <meta name="theme-color" content="#05162D">
 
-    <!-- Favicon -->
+    {% comment %} <!-- Favicon --> {% endcomment %}
     <link rel="icon" type="image/jpeg" href="{% static 'images/carecarry-logo.jpeg' %}">
 
-    <!-- Google Fonts (single, deduped request) -->
+    {% comment %} <!-- Google Fonts (single, deduped request) --> {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -25,9 +25,9 @@
   </head>
 
   <body class="min-h-screen bg-white font-body text-cay-primary antialiased">
-    <!-- =====================
+    {% comment %} <!-- =====================
          HEADER
-    ====================== -->
+    ====================== --> {% endcomment %}
     <header class="sticky top-0 z-50 border-b border-cay-primary/10 bg-white/95 backdrop-blur">
       <nav class="page-container flex items-center justify-between gap-6 px-5 py-4 sm:px-8 lg:px-12 xl:px-16">
 
@@ -40,7 +40,7 @@
           >
         </a>
 
-        <!-- MOBILE MENU TOGGLE (hidden ≥lg) -->
+        {% comment %} <!-- MOBILE MENU TOGGLE (hidden ≥lg) --> {% endcomment %}
         <button
           type="button"
           class="inline-flex h-11 w-11 items-center justify-center border border-neutral-200 text-cay-primary transition hover:bg-cay-primary-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-cay-primary/30 lg:hidden"
@@ -49,7 +49,7 @@
           aria-label="Open navigation menu"
           data-menu-toggle
         >
-          <!-- Hamburger icon -->
+          {% comment %} <!-- Hamburger icon --> {% endcomment %}
           <svg
             data-menu-icon="open"
             class="h-6 w-6"
@@ -63,7 +63,7 @@
           >
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <!-- Close icon -->
+          {% comment %} <!-- Close icon --> {% endcomment %}
           <svg
             data-menu-icon="close"
             class="hidden h-6 w-6"
@@ -79,10 +79,10 @@
           </svg>
         </button>
 
-        <!-- NAVIGATION
+        {% comment %} <!-- NAVIGATION
              Mobile:  column drawer, hidden by default (max-lg:hidden toggled by JS)
              Desktop: row, always visible
-        -->
+        --> {% endcomment %}
         <div
           id="primary-nav"
           class="flex max-lg:hidden w-full flex-col items-stretch gap-1 border-t border-neutral-100 pt-4 text-sm font-medium lg:w-auto lg:flex-row lg:items-center lg:gap-x-7 lg:gap-y-0 lg:border-0 lg:pt-0"
@@ -111,14 +111,14 @@
       </nav>
     </header>
 
-    <!-- MAIN PAGE CONTENT -->
+    {% comment %} <!-- MAIN PAGE CONTENT --> {% endcomment %}
     <main>
       {% block content %}{% endblock content %}
     </main>
-
+{% comment %} 
     <!-- =====================
          FOOTER (unchanged)
-    ====================== -->
+    ====================== --> {% endcomment %}
     <footer id="contact" class="border-t border-cay-primary/10 bg-[#F7F5F0]">
       <div class="page-container px-6 py-16 sm:px-8 lg:px-12 xl:px-16 lg:py-20">
         <div class="grid gap-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-20">
@@ -166,11 +166,7 @@
       </div>
     </footer>
 
-    <!-- =====================
-         HEADER MENU SCRIPT
-         Placed OUTSIDE {% block extra_js %} so child templates
-         that override extra_js can't accidentally remove it.
-    ====================== -->
+    
     <script>
       (function () {
         var toggle = document.querySelector('[data-menu-toggle]');
