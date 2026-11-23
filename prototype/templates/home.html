@@ -1,8 +1,722 @@
 {% extends "root-layout.html" %}
+{% load static %}
 
-{% block title %} Home {% endblock title %} 
+{% block title %}Home{% endblock title %}
+
+{% block extra_css %}
+<style>
+    /* ==========================================
+       BRAND TOKENS
+    ========================================== */
+    :root {
+        --cay-navy: #05162D;
+        --cay-navy-soft: #0A203A;
+        --cay-gold: #D19611;
+        --cay-gold-light: #E6AE2D;
+        --cay-gold-deep: #916508;
+        --cay-cream: #F7F5F0;
+    }
+
+    /* ==========================================
+       HERO
+    ========================================== */
+    .hero-section {
+        background:
+            radial-gradient(ellipse at 78% 48%, rgba(209, 150, 17, .09), transparent 38%),
+            var(--cay-navy);
+    }
+
+    .gold-highlight {
+        color: var(--cay-gold);
+    }
+
+    /* ==========================================
+       TRUCK ANIMATION
+    ========================================== */
+    .truck {
+        animation: truckFloat 5s ease-in-out infinite;
+    }
+
+    .truck-wheels {
+        transform-origin: center;
+        animation: wheelSpin 5s linear infinite;
+    }
+
+    .truck-trail {
+        animation: trailPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes truckFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+    @keyframes wheelSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @keyframes trailPulse {
+        0%, 100% { opacity: .25; }
+        50% { opacity: .8; }
+    }
+
+    /* ==========================================
+       BUTTONS — consistent sharp corners, generous padding
+    ========================================== */
+    .gold-button {
+        background: var(--cay-gold);
+        color: var(--cay-navy);
+        transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+
+    .gold-button:hover {
+        background: var(--cay-gold-light);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(209, 150, 17, .22);
+    }
+
+    .outline-button {
+        border: 1px solid rgba(255, 255, 255, .5);
+        color: #FFFFFF;
+        transition: border-color .25s ease, color .25s ease, background .25s ease;
+    }
+
+    .outline-button:hover {
+        border-color: var(--cay-gold-light);
+        color: var(--cay-gold-light);
+        background: rgba(230, 174, 45, .06);
+    }
+
+    /* ==========================================
+       SERVICE CARDS
+    ========================================== */
+    .service-card {
+        transition:
+            transform .3s ease,
+            border-color .3s ease,
+            box-shadow .3s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--cay-gold);
+        box-shadow: 0 18px 40px rgba(5, 22, 45, .10);
+    }
+
+    /* ==========================================
+       FAQ
+    ========================================== */
+    .faq-answer {
+        animation: faqReveal .25s ease;
+    }
+
+    @keyframes faqReveal {
+        from { opacity: 0; transform: translateY(-5px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .truck,
+        .truck-wheels,
+        .truck-trail {
+            animation: none !important;
+        }
+
+        .service-card,
+        .gold-button,
+        .outline-button {
+            transition: none;
+        }
+
+        .service-card:hover,
+        .gold-button:hover {
+            transform: none;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
 
 {% block content %}
-  <h1 class="text-3xl font-bold text-cay-secondary">This is my home page</h1>
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+<section class="hero-section relative overflow-hidden">
+
+    <div class="page-container grid min-h-[600px] items-center gap-14 px-6 py-20 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:px-16 lg:py-28">
+
+        <!-- HERO CONTENT -->
+        <div class="relative z-10 max-w-2xl">
+
+            <div class="mb-8 flex items-center gap-4">
+                <span class="h-px w-12 bg-[#E6AE2D]"></span>
+                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                    Moving Made Easier
+                </span>
+            </div>
+
+            <h1 class="font-display text-4xl font-bold leading-[1.15] text-white sm:text-5xl lg:text-6xl">
+                Your Move.
+                <span class="gold-highlight">Our Care.</span>
+                <br>
+                Every Step.
+            </h1>
+
+            <p class="mt-8 max-w-lg text-sm leading-8 text-slate-300 sm:text-base">
+                Moving doesn't have to be overwhelming.
+                CareCarry helps make your moving experience
+                simpler, smoother and more convenient.
+            </p>
+
+            <div class="mt-10 flex flex-wrap items-center gap-5">
+
+                <a href="/book/"
+                   class="gold-button inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold">
+                    Book a Move
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <a href="#services"
+                   class="outline-button inline-flex items-center gap-3 px-8 py-4 text-sm font-medium">
+                    Explore Services
+                </a>
+
+            </div>
+
+            <div class="mt-14 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-white/10 pt-8">
+
+                <div>
+                    <p class="font-display text-sm font-semibold text-white">
+                        Thoughtful Support
+                    </p>
+                    <p class="mt-1.5 text-xs text-slate-300">
+                        Help throughout your move
+                    </p>
+                </div>
+
+                <span class="hidden h-10 w-px self-center bg-white/20 sm:block"></span>
+
+                <div>
+                    <p class="font-display text-sm font-semibold text-white">
+                        Less Moving Stress
+                    </p>
+                    <p class="mt-1.5 text-xs text-slate-300">
+                        A smoother experience
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRUCK ILLUSTRATION -->
+        <div class="relative mx-auto w-full max-w-[540px]">
+
+            <div class="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cay-secondary/10 blur-[90px]"></div>
+
+            <svg viewBox="0 0 620 390"
+                 class="truck relative z-10 w-full"
+                 xmlns="http://www.w3.org/2000/svg"
+                 role="img"
+                 aria-label="Illustration of a moving truck">
+
+                <ellipse cx="320" cy="330" rx="230" ry="22"
+                         fill="#000000" opacity=".25"/>
+
+                <path d="M35 320H585"
+                      stroke="#D19611"
+                      stroke-opacity=".35"
+                      stroke-width="2"/>
+
+                <path d="M91 105H365V286H91V105Z" fill="#E9EDF2"/>
+                <path d="M91 105H365V128H91V105Z" fill="#D19611"/>
+                <path d="M104 139H350V270H104V139Z" fill="#F7F8FA"/>
+
+                <path d="M122 153V257M338 153V257"
+                      stroke="#D8DDE4" stroke-width="3"/>
+
+                <path d="M135 153H324"
+                      stroke="#D8DDE4" stroke-width="2"/>
+
+                <path d="M365 160H435L505 226V286H365V160Z"
+                      fill="#D19611"/>
+
+                <path d="M382 174H428L475 222H382V174Z"
+                      fill="#0C2A4B"/>
+
+                <path d="M391 182H424L456 214H391V182Z"
+                      fill="#B8D2E7"/>
+
+                <path d="M391 182V214"
+                      stroke="#DCEAF5" stroke-width="2"/>
+
+                <path d="M365 244H505V286H365V244Z"
+                      fill="#B47B0C"/>
+
+                <path d="M475 244H505V286H475V244Z"
+                      fill="#E6AE2D"/>
+
+                <path d="M484 278H520V294H484Z" fill="#DCE2E9"/>
+                <path d="M84 278H113V294H84Z" fill="#DCE2E9"/>
+
+                <rect x="495" y="247" width="12" height="17"
+                      rx="2" fill="#FFF0BC"/>
+
+                <path d="M182 174L225 151L268 174V221L225 245L182 221V174Z"
+                      fill="#05162D"/>
+
+                <path d="M225 151V197M182 174L225 197L268 174M225 197V245"
+                      stroke="#D19611" stroke-width="2.5"/>
+
+                <g class="truck-wheels">
+                    <circle cx="171" cy="289" r="31" fill="#101923"/>
+                    <circle cx="171" cy="289" r="17" fill="#B8C1CC"/>
+                    <circle cx="171" cy="289" r="7" fill="#39495B"/>
+                    <path d="M171 272V306M154 289H188M159 277L183 301M183 277L159 301"
+                          stroke="#64748B" stroke-width="2"/>
+                </g>
+
+                <g class="truck-wheels">
+                    <circle cx="438" cy="289" r="31" fill="#101923"/>
+                    <circle cx="438" cy="289" r="17" fill="#B8C1CC"/>
+                    <circle cx="438" cy="289" r="7" fill="#39495B"/>
+                    <path d="M438 272V306M421 289H455M426 277L450 301M450 277L426 301"
+                          stroke="#64748B" stroke-width="2"/>
+                </g>
+
+                <g class="truck-trail">
+                    <path d="M43 242H80M58 256H80"
+                          stroke="#D19611"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
+                </g>
+
+            </svg>
+
+            <div class="absolute bottom-[3%] right-[5%] border border-cay-secondary/30 bg-[#05162D] px-5 py-3">
+                <p class="text-xs font-semibold uppercase tracking-[.18em] text-[#E6AE2D]">
+                    CareCarry
+                </p>
+                <p class="mt-1 text-[10px] tracking-wide text-slate-300">
+                    Your Move. Our Care.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
+
+</section>
+
+
+<!-- ==========================================
+     INTRODUCTION
+=========================================== -->
+<section id="about" class="bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-24">
+
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
+                Welcome to CareCarry
+            </span>
+
+            <h2 class="mt-6 max-w-xl font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl lg:text-5xl">
+                A better way to
+                <span class="gold-highlight">move forward.</span>
+            </h2>
+        </div>
+
+        <div>
+            <p class="text-sm leading-8 text-cay-primary/70 sm:text-base">
+                Every move comes with details to manage, things to organise
+                and decisions to make. CareCarry exists to make that process
+                easier by providing moving assistance with care and attention.
+            </p>
+
+            <a href="#services"
+               class="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-cay-primary transition hover:gap-4 hover:text-[#916508]">
+                Discover our services
+                <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     SERVICES
+=========================================== -->
+<section id="services" class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container">
+
+        <!-- SECTION HEADER -->
+        <div class="flex flex-col justify-between gap-10 sm:flex-row sm:items-end">
+
+            <div class="max-w-xl">
+                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
+                    What We Do
+                </span>
+
+                <h2 class="mt-6 font-display text-3xl font-semibold text-cay-primary sm:text-4xl">
+                    Moving support,
+                    <span class="gold-highlight">made simple.</span>
+                </h2>
+
+                <p class="mt-6 text-sm leading-8 text-cay-primary/65">
+                    Explore the assistance available to make your next move easier.
+                </p>
+            </div>
+
+            <a href="/book/"
+               class="inline-flex shrink-0 items-center gap-3 text-sm font-semibold text-cay-primary transition hover:gap-4 hover:text-[#916508]">
+                Get started <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
+
+
+        <!-- CARDS GRID -->
+        <div class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+
+            <!-- SERVICE 1 -->
+            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
+                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3 10.5L12 3l9 7.5M5.5 9v11h13V9M9 20v-6h6v6"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Moving Assistance
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
+                    Support with the tasks involved in making your move from one place to another.
+                </p>
+
+                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Learn more <span aria-hidden="true">→</span>
+                </a>
+
+            </article>
+
+
+            <!-- SERVICE 2 -->
+            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
+                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M4 7l8-4 8 4-8 4-8-4ZM4 7v10l8 4 8-4V7M12 11v10M8 5l8 4"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Packing Support
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
+                    Assistance with organising and preparing belongings for a move.
+                </p>
+
+                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Learn more <span aria-hidden="true">→</span>
+                </a>
+
+            </article>
+
+
+            <!-- SERVICE 3 -->
+            <article class="service-card flex flex-col bg-white p-12 shadow-[0_1px_4px_rgba(5,22,45,0.04)] sm:col-span-2 lg:col-span-1">
+
+                <div class="flex h-16 w-16 items-center justify-center text-[#916508]">
+                    <svg viewBox="0 0 24 24" class="h-9 w-9" fill="none"
+                         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3 17h18M5 17V8h14v9M8 8V5h8v3M7 17v2m10-2v2M8 12h8"/>
+                    </svg>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Loading & Unloading
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/65">
+                    Help with handling and moving belongings during the moving process.
+                </p>
+
+                <a href="/book/" class="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-[#916508]">
+                    Learn more <span aria-hidden="true">→</span>
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     HOW IT WORKS
+=========================================== -->
+<section id="process" class="bg-white px-6 py-24 text-cay-primary sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container">
+
+        <div class="mx-auto max-w-2xl text-center">
+
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
+                The Process
+            </span>
+
+            <h2 class="mt-5 font-display text-3xl font-semibold sm:text-4xl">
+                Moving made easier in
+                <span class="gold-highlight">four steps.</span>
+            </h2>
+
+            <p class="mt-5 text-sm leading-7 text-cay-primary/65">
+                A straightforward process to help you get moving.
+            </p>
+
+        </div>
+
+
+        <div class="mt-20 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div class="border-t-2 border-cay-secondary/40 pt-8">
+                <span class="font-display text-4xl font-bold text-cay-secondary">01</span>
+                <h3 class="mt-6 font-display text-lg font-semibold">Make an Enquiry</h3>
+                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
+                    Tell us about your move and the kind of assistance you need.
+                </p>
+            </div>
+
+            <div class="border-t-2 border-cay-secondary/40 pt-8">
+                <span class="font-display text-4xl font-bold text-cay-secondary">02</span>
+                <h3 class="mt-6 font-display text-lg font-semibold">Share Your Details</h3>
+                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
+                    Provide your moving locations, preferred date and other relevant details.
+                </p>
+            </div>
+
+            <div class="border-t-2 border-cay-secondary/40 pt-8">
+                <span class="font-display text-4xl font-bold text-cay-secondary">03</span>
+                <h3 class="mt-6 font-display text-lg font-semibold">Discuss Your Move</h3>
+                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
+                    Discuss the assistance required and the arrangements for your move.
+                </p>
+            </div>
+
+            <div class="border-t-2 border-cay-secondary/40 pt-8">
+                <span class="font-display text-4xl font-bold text-cay-secondary">04</span>
+                <h3 class="mt-6 font-display text-lg font-semibold">Get Moving</h3>
+                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
+                    Move forward with the agreed arrangements and support.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     WHY CARECARRY
+=========================================== -->
+<section class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
+
+        <div>
+
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
+                Why CareCarry
+            </span>
+
+            <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl">
+                More than moving.
+                <span class="gold-highlight">It's about care.</span>
+            </h2>
+
+            <p class="mt-6 max-w-lg text-sm leading-8 text-cay-primary/70">
+                We believe moving should be approached with organisation,
+                attention and consideration. Our focus is on making the
+                experience easier for the people we serve.
+            </p>
+
+        </div>
+
+
+        <div class="grid gap-10 sm:grid-cols-2">
+
+            <div class="border-l-2 border-cay-secondary pl-6">
+                <h3 class="font-display text-base font-semibold text-cay-primary">
+                    Customer Focus
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
+                    Understanding each customer's moving needs.
+                </p>
+            </div>
+
+            <div class="border-l-2 border-cay-secondary pl-6">
+                <h3 class="font-display text-base font-semibold text-cay-primary">
+                    Organisation
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
+                    Giving attention to the details involved in moving.
+                </p>
+            </div>
+
+            <div class="border-l-2 border-cay-secondary pl-6">
+                <h3 class="font-display text-base font-semibold text-cay-primary">
+                    Convenience
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
+                    Helping simplify the moving process.
+                </p>
+            </div>
+
+            <div class="border-l-2 border-cay-secondary pl-6">
+                <h3 class="font-display text-base font-semibold text-cay-primary">
+                    Thoughtful Service
+                </h3>
+                <p class="mt-3 text-sm leading-7 text-cay-primary/65">
+                    Approaching every move with care and attention.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     FAQ
+=========================================== -->
+<section class="bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-16 lg:grid-cols-2 lg:gap-24">
+
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#916508]">
+                FAQs
+            </span>
+
+            <h2 class="mt-5 font-display text-3xl font-semibold text-cay-primary sm:text-4xl">
+                Questions?
+                <span class="gold-highlight">We've got you.</span>
+            </h2>
+
+            <p class="mt-6 max-w-md text-sm leading-8 text-cay-primary/65">
+                Here are a few things you might want to know before making an enquiry.
+            </p>
+
+            <a href="/book/" class="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-cay-primary transition hover:gap-4 hover:text-[#916508]">
+                Ask us a question <span aria-hidden="true">→</span>
+            </a>
+        </div>
+
+
+        <div class="divide-y divide-cay-primary/10">
+
+            <details class="group py-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
+                    What services does CareCarry offer?
+                    <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
+                    CareCarry provides moving assistance. The available services can be discussed when making an enquiry.
+                </p>
+            </details>
+
+            <details class="group py-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
+                    How do I request moving assistance?
+                    <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
+                    Use the Book a Move page to share your details and describe the assistance you need.
+                </p>
+            </details>
+
+            <details class="group py-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
+                    Can I discuss my moving requirements first?
+                    <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
+                    Yes. You can make an enquiry and discuss your requirements before finalising arrangements.
+                </p>
+            </details>
+
+            <details class="group py-8">
+                <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-sm font-medium text-cay-primary">
+                    How do I get a quote?
+                    <span class="shrink-0 text-xl text-[#916508] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p class="faq-answer mt-5 max-w-prose text-sm leading-8 text-cay-primary/65">
+                    Submit your moving details through the enquiry page so the team can discuss your request.
+                </p>
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     FINAL CALL TO ACTION
+=========================================== -->
+<section class="relative overflow-hidden bg-cay-primary px-6 py-24 sm:px-10 lg:px-16 lg:py-28">
+
+    <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cay-secondary/10 blur-[100px]"></div>
+
+    <div class="page-container relative z-10 flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
+
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                Ready when you are
+            </span>
+
+            <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                Let's make your next move
+                <span class="gold-highlight">a little easier.</span>
+            </h2>
+
+            <p class="mt-6 max-w-xl text-sm leading-7 text-slate-300">
+                Tell us what you need and take the first step towards a smoother move.
+            </p>
+        </div>
+
+        <a href="/book/"
+           class="gold-button inline-flex shrink-0 items-center gap-3 px-8 py-4 text-sm font-semibold">
+            Book a Move
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </div>
+
+</section>
 
 {% endblock content %}
