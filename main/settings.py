@@ -126,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'          # ← no nested "static"
+STATIC_ROOT = BASE_DIR / 'staticfiles'        # ← no nested "static"
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
     BASE_DIR / 'theme' / 'static',
