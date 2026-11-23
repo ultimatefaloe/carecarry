@@ -126,17 +126,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'          # ← no nested "static"
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'theme' / 'static',   # ← add this
+    BASE_DIR / 'theme' / 'static',
 ]
 
 # Nested under a "static" subfolder so the deployed output lines up with
 # vercel.json's "/static/(.*)" route — collectstatic dumps everything here,
 # and vercel.json's static-build step publishes this whole directory
 # (distDir: "staticfiles") at the deployment root.
-STATIC_ROOT = BASE_DIR / 'staticfiles' / 'static'
-
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'

@@ -1,17 +1,16 @@
 #!/bin/bash
-set -e # Stop on any error
+set -e
 
-echo "Building project packages..."
-# --break-system-packages: Vercel's build image's Python is managed by uv
-# (PEP 668), which blocks a bare `pip install` outside a virtualenv. This
-# build container is thrown away after the build step, so there's no real
-# "system" to protect here.
+echo "Installing Python packages..."
 python3 -m pip install --break-system-packages -r requirements.txt
 
-echo "Installing tailwindcss and dependencies..."
+echo "Installing Tailwind dependencies..."
 python3 manage.py tailwind install
 
-echo "Building tailwindcss..."
+echo "Building Tailwind CSS..."
 python3 manage.py tailwind build
 
-echo "Build process completed!"
+echo "Collecting Django static files..."
+python3 manage.py collectstatic --noinput
+
+echo "Build process completed."
