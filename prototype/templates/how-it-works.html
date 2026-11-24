@@ -1,0 +1,384 @@
+{% extends "root-layout.html" %}
+{% load static %}
+
+{% block title %}How It Works{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .process-eyebrow {
+        letter-spacing: .22em;
+    }
+
+    .process-rule {
+        width: 48px;
+        height: 2px;
+        background: #D19611;
+    }
+
+    .process-icon {
+        display: flex;
+        width: 3.5rem;
+        height: 3.5rem;
+        align-items: center;
+        justify-content: center;
+        color: #916508;
+    }
+
+    .process-step {
+        transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .process-step:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 50px rgba(5, 22, 45, .10);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .process-step {
+            transition: none;
+        }
+        .process-step:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+<section class="relative overflow-hidden bg-[#05162D]">
+
+    <div class="page-container grid items-center gap-16 px-6 py-24 sm:px-10 lg:min-h-[620px] lg:grid-cols-2 lg:gap-12 lg:px-16 lg:py-32">
+
+        <div class="relative z-10 max-w-2xl">
+
+            <div class="mb-8 flex items-center gap-4">
+                <span class="h-px w-12 bg-[#E6AE2D]"></span>
+                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                    How It Works
+                </span>
+            </div>
+
+            <h1 class="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                Moving made
+                <span class="block text-[#D19611]">simpler.</span>
+                Every step of the way.
+            </h1>
+
+            <p class="mt-8 max-w-xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-9">
+                A move involves many details. CareCarry aims to make the process
+                easier to understand, easier to organise and easier to navigate.
+            </p>
+
+            <div class="mt-10 flex flex-wrap items-center gap-5">
+
+                <a href="{% url 'prototype:book_move' %}"
+                   class="gold-button inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold">
+                    Get Started
+                    <span aria-hidden="true">→</span>
+                </a>
+
+                <a href="{% url 'prototype:contact' %}"
+                   class="outline-button inline-flex items-center gap-3 px-8 py-4 text-sm font-medium">
+                    Ask a Question
+                </a>
+
+            </div>
+
+            <div class="mt-14 flex items-center gap-4 border-t border-white/10 pt-8">
+                <span class="h-px w-10 bg-[#D19611]"></span>
+                <span class="text-xs font-medium uppercase tracking-[0.18em] text-slate-300">
+                    Your Move. Our Care. Every Step.
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- PROCESS VISUAL -->
+        <div class="relative mx-auto w-full max-w-[400px] lg:max-w-none">
+
+            <div class="relative z-10 border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm sm:p-8">
+
+                <div class="mb-8 flex items-center justify-between">
+                    <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                        Your moving journey
+                    </span>
+                    <span class="h-1.5 w-1.5 shrink-0 bg-[#D19611]"></span>
+                </div>
+
+                <div class="space-y-6">
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center border border-cay-secondary/50 text-xs font-semibold text-[#E6AE2D]">01</span>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Tell us what you need</p>
+                            <p class="mt-1 text-xs leading-6 text-slate-300">Share your moving requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="ml-4 h-6 border-l border-cay-secondary/40"></div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center border border-cay-secondary/50 text-xs font-semibold text-[#E6AE2D]">02</span>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Discuss the details</p>
+                            <p class="mt-1 text-xs leading-6 text-slate-300">Go through your moving needs.</p>
+                        </div>
+                    </div>
+
+                    <div class="ml-4 h-6 border-l border-cay-secondary/40"></div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center border border-cay-secondary/50 text-xs font-semibold text-[#E6AE2D]">03</span>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Prepare for moving day</p>
+                            <p class="mt-1 text-xs leading-6 text-slate-300">Organise the next steps.</p>
+                        </div>
+                    </div>
+
+                    <div class="ml-4 h-6 border-l border-cay-secondary/40"></div>
+
+                    <div class="flex items-start gap-4">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center border border-cay-secondary/50 text-xs font-semibold text-[#E6AE2D]">04</span>
+                        <div>
+                            <p class="text-sm font-semibold text-white">Move forward</p>
+                            <p class="mt-1 text-xs leading-6 text-slate-300">Get ready for your next chapter.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 border-t border-white/10 pt-5">
+                    <p class="text-xs leading-6 text-slate-300">
+                        A clear journey from enquiry to moving day.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
+
+</section>
+
+
+<!-- ==========================================
+     INTRODUCTION
+=========================================== -->
+<section class="bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-20">
+
+        <div class="lg:col-span-7">
+            <span class="text-xs font-semibold uppercase process-eyebrow text-[#916508]">
+                A clearer approach
+            </span>
+
+            <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl lg:text-5xl">
+                Good moves begin with
+                <span class="gold-highlight">good planning.</span>
+            </h2>
+        </div>
+
+        <div class="lg:col-span-5">
+            <p class="text-sm leading-8 text-cay-primary/70 sm:text-base">
+                No two moves are exactly alike. The things you need help with,
+                the items involved and the arrangements required can all differ.
+            </p>
+
+            <p class="mt-5 text-sm leading-8 text-cay-primary/70 sm:text-base">
+                That is why understanding your requirements comes first.
+                CareCarry's process is designed around communication,
+                organisation and practical moving support.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     FOUR STEPS
+=========================================== -->
+<section class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container">
+
+        <div class="max-w-xl">
+            <span class="text-xs font-semibold uppercase process-eyebrow text-[#916508]">
+                How it works
+            </span>
+
+            <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl">
+                Four steps towards
+                <span class="gold-highlight">a smoother move.</span>
+            </h2>
+
+            <p class="mt-6 text-sm leading-8 text-cay-primary/65 sm:text-base">
+                Here's a simple overview of how the process is structured.
+            </p>
+        </div>
+
+
+        <div class="mt-16 grid gap-8 sm:gap-10 md:grid-cols-2">
+
+            <!-- STEP 1 -->
+            <article class="process-step flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex items-start justify-between">
+                    <div class="process-icon">
+                        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 12h8m-8 5h5m-9 4h14a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-display text-3xl font-bold text-cay-secondary">01</span>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Tell Us About Your Move
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/70">
+                    Start by sharing the details of your move. Let us know
+                    what kind of assistance you need and the basic information
+                    that will help us understand your requirements.
+                </p>
+
+                <a href="{% url 'prototype:book_move' %}"
+                   class="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-[#916508] transition hover:gap-4 hover:text-cay-primary">
+                    Make an enquiry <span aria-hidden="true">→</span>
+                </a>
+
+            </article>
+
+
+            <!-- STEP 2 -->
+            <article class="process-step flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex items-start justify-between">
+                    <div class="process-icon">
+                        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M8 10h8m-8 4h5m-9 7h14a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-display text-3xl font-bold text-cay-secondary">02</span>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Discuss Your Requirements
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/70">
+                    Go through the details of your move and the assistance
+                    you're looking for. This helps establish a clearer
+                    understanding of what needs to be arranged.
+                </p>
+
+            </article>
+
+
+            <!-- STEP 3 -->
+            <article class="process-step flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex items-start justify-between">
+                    <div class="process-icon">
+                        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h10"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-display text-3xl font-bold text-cay-secondary">03</span>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Organise the Details
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/70">
+                    Once the requirements are understood, the necessary
+                    arrangements can be considered so that the move has
+                    a clearer direction.
+                </p>
+
+            </article>
+
+
+            <!-- STEP 4 -->
+            <article class="process-step flex flex-col bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)]">
+
+                <div class="flex items-start justify-between">
+                    <div class="process-icon">
+                        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12l4 4L19 6"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-display text-3xl font-bold text-cay-secondary">04</span>
+                </div>
+
+                <h3 class="mt-10 font-display text-xl font-semibold text-cay-primary">
+                    Get Ready to Move
+                </h3>
+
+                <p class="mt-5 flex-1 text-sm leading-8 text-cay-primary/70">
+                    With the details considered and arrangements discussed,
+                    you can focus on preparing for the next chapter.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     CLOSING CTA
+=========================================== -->
+<section class="relative overflow-hidden bg-cay-primary px-6 py-24 sm:px-10 lg:px-16 lg:py-28">
+
+    <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cay-secondary/10 blur-[100px]"></div>
+
+    <div class="page-container relative z-10 flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
+
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                Your next step
+            </span>
+
+            <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                Ready to make
+                <span class="gold-highlight">your move?</span>
+            </h2>
+
+            <p class="mt-6 max-w-xl text-sm leading-7 text-slate-300">
+                Start with a conversation about what you need.
+                Let's take the first step towards a more organised move.
+            </p>
+        </div>
+
+        <a href="{% url 'prototype:book_move' %}"
+           class="gold-button inline-flex shrink-0 items-center gap-3 px-8 py-4 text-sm font-semibold">
+            Book a Move
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock content %}

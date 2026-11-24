@@ -1,0 +1,353 @@
+{% extends "root-layout.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .contact-eyebrow {
+        letter-spacing: .22em;
+    }
+
+    .contact-field {
+        width: 100%;
+        border: 1px solid #DCE1E9;
+        background: #fff;
+        padding: 14px 16px;
+        color: #05162D;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .contact-field:focus {
+        border-color: #D19611;
+        box-shadow: 0 0 0 3px rgba(209, 150, 17, .12);
+    }
+
+    .contact-field::placeholder {
+        color: #9AA3B2;
+    }
+
+    .contact-field:focus-visible {
+        outline: none;
+    }
+
+    .contact-info-item {
+        border-bottom: 1px solid rgba(255, 255, 255, .12);
+        padding: 24px 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .contact-field {
+            transition: none;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+<section class="relative overflow-hidden bg-[#05162D]">
+
+    <div class="page-container px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+        <div class="max-w-3xl">
+
+            <div class="mb-8 flex items-center gap-4">
+                <span class="h-px w-12 bg-[#E6AE2D]"></span>
+                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                    Get in Touch
+                </span>
+            </div>
+
+            <h1 class="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                Let's talk about
+                <span class="block text-[#D19611]">your next move.</span>
+            </h1>
+
+            <p class="mt-8 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-9">
+                Have questions or need moving assistance?
+                Get in touch with us and tell us what you have in mind.
+                We're ready to hear from you.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
+
+</section>
+
+
+<!-- ==========================================
+     CONTACT CONTENT
+=========================================== -->
+<section class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-10 lg:grid-cols-5 lg:gap-12">
+
+        <!-- CONTACT INFORMATION -->
+        <div class="bg-cay-primary p-10 text-white sm:p-12 lg:col-span-2">
+
+            <span class="text-xs font-semibold uppercase contact-eyebrow text-[#E6AE2D]">
+                Contact Information
+            </span>
+
+            <h2 class="mt-6 font-display text-2xl font-semibold leading-snug">
+                We'd love to hear from you.
+            </h2>
+
+            <p class="mt-5 text-sm leading-7 text-slate-300">
+                Reach out to discuss your moving needs, ask a question
+                or learn more about the assistance we offer.
+            </p>
+
+
+            <!-- EMAIL -->
+            <div class="contact-info-item mt-8">
+
+                <div class="flex items-center gap-3">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" class="text-[#E6AE2D]">
+                        <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 6l9 7 9-7M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+                    </svg>
+
+                    <h3 class="text-sm font-semibold">Email</h3>
+                </div>
+
+                <p class="mt-3 text-sm text-slate-300">
+                    [Insert official email address]
+                </p>
+
+            </div>
+
+
+            <!-- PHONE -->
+            <div class="contact-info-item">
+
+                <div class="flex items-center gap-3">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" class="text-[#E6AE2D]">
+                        <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 5a2 2 0 012-2h3l2 5-2 1a15 15 0 007 7l1-2 5 2v3a2 2 0 01-2 2C10 21 3 14 3 5z"/>
+                    </svg>
+
+                    <h3 class="text-sm font-semibold">Phone</h3>
+                </div>
+
+                <p class="mt-3 text-sm text-slate-300">
+                    [Insert official phone number]
+                </p>
+
+            </div>
+
+
+            <!-- LOCATION -->
+            <div class="contact-info-item">
+
+                <div class="flex items-center gap-3">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" class="text-[#E6AE2D]">
+                        <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                            d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1116 0z"/>
+                        <circle cx="12" cy="10" r="2.5" stroke-width="1.6"/>
+                    </svg>
+
+                    <h3 class="text-sm font-semibold">Location</h3>
+                </div>
+
+                <p class="mt-3 text-sm text-slate-300">
+                    [Insert business location]
+                </p>
+
+            </div>
+
+
+            <div class="mt-10 border-l-2 border-cay-secondary pl-6">
+                <p class="text-sm leading-7 text-slate-300">
+                    Your move deserves careful consideration.
+                    Let's start with a conversation.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ENQUIRY FORM -->
+        <div class="bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)] sm:p-12 lg:col-span-3">
+
+            <span class="text-xs font-semibold uppercase contact-eyebrow text-[#916508]">
+                Send an Enquiry
+            </span>
+
+            <h2 class="mt-6 font-display text-3xl font-semibold text-cay-primary">
+                How can we help?
+            </h2>
+
+            <p class="mt-5 text-sm leading-7 text-cay-primary/65">
+                Fill in the details below and tell us a little about
+                what you're looking for.
+            </p>
+
+
+            <form method="post" class="mt-10 space-y-8">
+
+                {% csrf_token %}
+
+                <div class="grid gap-6 sm:grid-cols-2">
+
+                    <div>
+                        <label for="contact-name" class="mb-2 block text-sm font-semibold text-cay-primary">
+                            Full name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contact-name"
+                            name="name"
+                            placeholder="Your full name"
+                            class="contact-field"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+
+                    <div>
+                        <label for="contact-email" class="mb-2 block text-sm font-semibold text-cay-primary">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="contact-email"
+                            name="email"
+                            placeholder="you@example.com"
+                            class="contact-field"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="grid gap-6 sm:grid-cols-2">
+
+                    <div>
+                        <label for="contact-phone" class="mb-2 block text-sm font-semibold text-cay-primary">
+                            Phone number
+                            <span class="font-normal text-cay-primary/50">(Optional)</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="contact-phone"
+                            name="phone"
+                            placeholder="Your phone number"
+                            class="contact-field"
+                            autocomplete="tel"
+                        >
+                    </div>
+
+
+                    <div>
+                        <label for="contact-subject" class="mb-2 block text-sm font-semibold text-cay-primary">
+                            Subject
+                        </label>
+
+                        <select
+                            id="contact-subject"
+                            name="subject"
+                            class="contact-field"
+                            required
+                        >
+                            <option value="" disabled selected>Select a subject</option>
+                            <option value="Moving assistance">Moving assistance</option>
+                            <option value="Packing support">Packing support</option>
+                            <option value="Loading and unloading">Loading and unloading</option>
+                            <option value="General enquiry">General enquiry</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <label for="contact-message" class="mb-2 block text-sm font-semibold text-cay-primary">
+                        Your message
+                    </label>
+
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        rows="6"
+                        placeholder="Tell us how we can help..."
+                        class="contact-field resize-y"
+                        required
+                    ></textarea>
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="gold-button inline-flex w-full items-center justify-center gap-3 px-8 py-4 text-sm font-semibold sm:w-auto"
+                >
+                    Send Message
+                    <span aria-hidden="true">→</span>
+                </button>
+
+                <p class="text-xs leading-6 text-cay-primary/50">
+                    Please provide accurate contact information so that
+                    your enquiry can be followed up.
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     FINAL CTA
+=========================================== -->
+<section class="relative overflow-hidden bg-cay-primary px-6 py-24 sm:px-10 lg:px-16 lg:py-28">
+
+    <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cay-secondary/10 blur-[100px]"></div>
+
+    <div class="page-container relative z-10 flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
+
+        <div>
+            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                Need moving assistance?
+            </span>
+
+            <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                Take the first step
+                <span class="gold-highlight">today.</span>
+            </h2>
+
+            <p class="mt-6 max-w-xl text-sm leading-7 text-slate-300">
+                Tell us what you need and we'll take it from there.
+            </p>
+        </div>
+
+        <a href="{% url 'prototype:book_move' %}"
+           class="gold-button inline-flex shrink-0 items-center gap-3 px-8 py-4 text-sm font-semibold">
+            Book a Move
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock content %}

@@ -1,3 +1,4 @@
+ 
 {% load static %}
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
     <meta name="description" content="CareCarry makes moving easier with convenient moving assistance.">
     <meta name="theme-color" content="#05162D">
 
-    <!-- Browser Tab Icon (Favicon) -->
+    <!-- Browser Tab Icon -->
     <link
         rel="icon"
         type="image/png"
@@ -34,78 +35,71 @@
     {% block extra_css %}{% endblock extra_css %}
 </head>
 
-
 <body class="min-h-screen bg-white font-body text-cay-primary antialiased">
 
-    <!-- WEBSITE HEADER -->
-    <header class="sticky top-0 z-50 border-b border-cay-primary/10 bg-white/95 backdrop-blur">
+   <!-- WEBSITE HEADER -->
+<header class="sticky top-0 z-50 border-b border-cay-primary/10 bg-white/95 backdrop-blur">
+<nav class="page-container flex flex-wrap items-center justify-between gap-10 px-12 py-9 sm:px-14 lg:px-24">
 
-       <nav class="page-container flex flex-wrap items-center justify-between gap-6 px-5 py-4 sm:px-8 lg:px-12 xl:px-16">
+        <!-- BRAND LOGO -->
+        <a href="{% url 'prototype:home' %}" class="flex shrink-0 items-center" aria-label="CareCarry Home">
+            <img
+                src="{% static 'images/carecarry-logo-header.png' %}"
+                alt="CareCarry Moving Help"
+                class="h-10 w-auto object-contain sm:h-11"
+            >
+        </a>
 
-            <!-- BRAND LOGO -->
-            <a href="/" class="flex shrink-0 items-center" aria-label="CareCarry Home">
-                <img
-                    src="{% static 'images/carecarry-logo-header.png' %}"
-                    alt="CareCarry Moving Help"
-                    class="h-10 w-auto object-contain sm:h-11"
-                >
+        <!-- NAVIGATION -->
+        <div class="flex flex-wrap items-center gap-x-10 gap-y-4 text-sm font-medium">
+
+            <a href="{% url 'prototype:home' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
+                Home
             </a>
 
+            <a href="{% url 'prototype:services' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
+                Services
+            </a>
 
-            <!-- NAVIGATION LINKS -->
-          <div class="flex flex-wrap items-center gap-x-7 gap-y-3 text-sm font-medium">
+            <a href="{% url 'prototype:how_it_works' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
+                How It Works
+            </a>
 
-                <a href="/" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                    Home
-                </a>
+            <a href="{% url 'prototype:about' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
+                About
+            </a>
 
-                <a href="/#services" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                    Services
-                </a>
+            <a href="{% url 'prototype:contact' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
+                Contact
+            </a>
 
-                <a href="/#process" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                    How It Works
-                </a>
+            <a href="{% url 'prototype:book_move' %}" class="btn btn-secondary ml-2 px-7 py-3.5">
+                Book a Move
+            </a>
 
-                <a href="/#about" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                    About
-                </a>
+        </div>
 
-                <a href="/#contact" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                    Contact
-                </a>
+    </nav>
 
-                <a href="/#quote" class="btn btn-secondary px-7 py-3.5">
-                    Book a Move
-                </a>
-
-            </div>
-
-        </nav>
-
-    </header>
-
+</header>
 
     <!-- MAIN PAGE CONTENT -->
     <main>
-
         {% block content %}
         {% endblock content %}
-
     </main>
 
-
     <!-- WEBSITE FOOTER -->
-    <footer id="contact" class="border-t border-cay-primary/10 bg-[#F7F5F0]">
+    <footer class="border-t border-cay-primary/10 bg-[#F7F5F0]">
 
-       <div class="page-container px-6 py-16 sm:px-8 lg:px-12 xl:px-16 lg:py-20">
+        <div class="page-container px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
 
-            <div class="grid gap-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-20">
+            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
 
                 <!-- BRAND INFORMATION -->
                 <div>
 
-                    <a href="/" class="inline-flex items-center" aria-label="CareCarry Home">
+                    <a href="{% url 'prototype:home' %}" class="inline-block" aria-label="CareCarry Home">
                         <img
                             src="{% static 'images/carecarry-logo.png' %}"
                             alt="CareCarry Moving Help"
@@ -113,13 +107,12 @@
                         >
                     </a>
 
-                    <p class="mt-6 max-w-sm text-sm leading-8 text-cay-primary/60">
+                    <p class="mt-6 max-w-sm text-sm leading-7 text-cay-primary/60">
                         Making your moving experience simpler,
                         smoother and more convenient.
                     </p>
 
                 </div>
-
 
                 <!-- QUICK LINKS -->
                 <div>
@@ -128,20 +121,21 @@
                         Quick Links
                     </h3>
 
-                    <div class="mt-6 flex flex-col items-start gap-5 text-sm text-cay-primary/60">
+                    <div class="mt-6 flex flex-col items-start gap-4 text-sm text-cay-primary/60">
 
-                        <a href="/" class="transition hover:text-cay-secondary">Home</a>
+                        <a href="{% url 'prototype:home' %}" class="transition hover:text-cay-secondary">Home</a>
 
-                        <a href="/#services" class="transition hover:text-cay-secondary">Services</a>
+                        <a href="{% url 'prototype:services' %}" class="transition hover:text-cay-secondary">Services</a>
 
-                        <a href="/#process" class="transition hover:text-cay-secondary">How It Works</a>
+                        <a href="{% url 'prototype:how_it_works' %}" class="transition hover:text-cay-secondary">How It Works</a>
 
-                        <a href="/#about" class="transition hover:text-cay-secondary">About Us</a>
+                        <a href="{% url 'prototype:about' %}" class="transition hover:text-cay-secondary">About Us</a>
+
+                        <a href="{% url 'prototype:contact' %}" class="transition hover:text-cay-secondary">Contact</a>
 
                     </div>
 
                 </div>
-
 
                 <!-- CONTACT -->
                 <div>
@@ -150,22 +144,18 @@
                         Get in Touch
                     </h3>
 
-                    <p class="mt-6 max-w-sm text-sm leading-8 text-cay-primary/60">
+                    <p class="mt-6 max-w-sm text-sm leading-7 text-cay-primary/60">
                         Have a question or planning a move?
                         We'd be happy to hear from you.
                     </p>
 
-                    <a
-                        href="/#quote"
-                        class="mt-6 inline-block text-sm font-semibold text-cay-secondary transition hover:text-cay-primary"
-                    >
+                    <a href="{% url 'prototype:book_move' %}" class="mt-4 inline-block text-sm font-semibold text-cay-secondary transition hover:text-cay-primary">
                         Request a Quote →
                     </a>
 
                 </div>
 
             </div>
-
 
             <!-- COPYRIGHT -->
             <div class="mt-16 border-t border-cay-primary/10 pt-8 text-center text-xs text-cay-primary/40">
@@ -184,9 +174,7 @@
 
     </footer>
 
-
     {% block extra_js %}{% endblock extra_js %}
 
 </body>
-
 </html>

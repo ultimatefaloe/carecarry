@@ -1,0 +1,604 @@
+{% extends "root-layout.html" %}
+{% load static %}
+
+{% block title %}Book a Move{% endblock title %}
+
+{% block extra_css %}
+<style>
+    .booking-eyebrow {
+        letter-spacing: .22em;
+    }
+
+    .booking-field {
+        width: 100%;
+        border: 1px solid #DCE1E9;
+        background: white;
+        padding: 14px 16px;
+        color: #05162D;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .booking-field:focus {
+        border-color: #D19611;
+        box-shadow: 0 0 0 3px rgba(209, 150, 17, .12);
+    }
+
+    .booking-field::placeholder {
+        color: #9AA3B2;
+    }
+
+    .booking-field:focus-visible {
+        outline: none;
+    }
+
+    .booking-section {
+        border-bottom: 1px solid #E5E7EB;
+        padding-bottom: 40px;
+    }
+
+    .booking-section:last-of-type {
+        border-bottom: 0;
+    }
+
+    .booking-number {
+        display: flex;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(209, 150, 17, .5);
+        color: #916508;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .booking-field {
+            transition: none;
+        }
+    }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+<section class="relative overflow-hidden bg-[#05162D]">
+
+    <div class="page-container px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+        <div class="max-w-3xl">
+
+            <div class="mb-8 flex items-center gap-4">
+                <span class="h-px w-12 bg-[#E6AE2D]"></span>
+                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                    Start Your Move
+                </span>
+            </div>
+
+            <h1 class="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+                Let's plan
+                <span class="block text-[#D19611]">your move.</span>
+            </h1>
+
+            <p class="mt-8 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-9">
+                Tell us a little about your moving requirements.
+                The details you provide will help us understand the assistance
+                you're looking for.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
+
+</section>
+
+
+<!-- ==========================================
+     BOOKING FORM
+=========================================== -->
+<section class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+
+    <div class="page-container grid gap-10 lg:grid-cols-3 lg:gap-12">
+
+        <!-- SIDE INFORMATION -->
+        <aside class="lg:col-span-1">
+
+            <div class="lg:sticky lg:top-28">
+
+                <span class="text-xs font-semibold uppercase booking-eyebrow text-[#916508]">
+                    Booking Enquiry
+                </span>
+
+                <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-cay-primary">
+                    Every move begins
+                    <span class="gold-highlight">with a plan.</span>
+                </h2>
+
+                <p class="mt-6 text-sm leading-8 text-cay-primary/70 sm:text-base">
+                    Complete the form with as much detail as possible.
+                    This gives CareCarry a better understanding of your
+                    requirements and the support you may need.
+                </p>
+
+                <div class="mt-10 border-l-2 border-cay-secondary pl-6">
+
+                    <p class="text-sm font-semibold text-cay-primary">
+                        Before you begin
+                    </p>
+
+                    <ul class="mt-5 space-y-4 text-sm leading-7 text-cay-primary/70">
+
+                        <li class="flex gap-3">
+                            <span class="shrink-0 font-semibold text-[#916508]">01.</span>
+                            Have your pickup and destination details ready.
+                        </li>
+
+                        <li class="flex gap-3">
+                            <span class="shrink-0 font-semibold text-[#916508]">02.</span>
+                            Know your preferred moving date.
+                        </li>
+
+                        <li class="flex gap-3">
+                            <span class="shrink-0 font-semibold text-[#916508]">03.</span>
+                            Describe any particular assistance you need.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="mt-12 border-t border-cay-primary/10 pt-8">
+
+                    <p class="text-sm font-semibold text-cay-primary">
+                        Have a question first?
+                    </p>
+
+                    <a href="{% url 'prototype:contact' %}"
+                       class="mt-4 inline-flex items-center gap-3 text-sm font-semibold text-[#916508] transition hover:gap-4 hover:text-cay-primary">
+                        Contact our team <span aria-hidden="true">→</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </aside>
+
+
+        <!-- FORM -->
+        <div class="bg-white p-10 shadow-[0_1px_4px_rgba(5,22,45,0.04)] sm:p-12 lg:col-span-2">
+
+            <div class="mb-10 border-b border-cay-primary/10 pb-8">
+
+                <span class="text-xs font-semibold uppercase booking-eyebrow text-[#916508]">
+                    Moving Details
+                </span>
+
+                <h2 class="mt-6 font-display text-2xl font-semibold text-cay-primary sm:text-3xl">
+                    Request a moving enquiry
+                </h2>
+
+                <p class="mt-5 text-sm leading-7 text-cay-primary/65">
+                    Fields marked with <span class="font-semibold text-[#916508]">*</span> are required.
+                </p>
+
+            </div>
+
+
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <!-- SECTION 1: PERSONAL DETAILS -->
+                <div class="booking-section mb-10">
+
+                    <div class="mb-8 flex items-center gap-4">
+                        <span class="booking-number">01</span>
+
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-cay-primary">
+                                Your details
+                            </h3>
+
+                            <p class="mt-1 text-xs text-cay-primary/50">
+                                How can we reach you?
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+
+                        <div>
+                            <label for="booking-name" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Full name <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="booking-name"
+                                name="full_name"
+                                placeholder="Enter your full name"
+                                class="booking-field"
+                                autocomplete="name"
+                                required
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="booking-email" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Email address <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="booking-email"
+                                name="email"
+                                placeholder="you@example.com"
+                                class="booking-field"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="booking-phone" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Phone number <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="booking-phone"
+                                name="phone"
+                                placeholder="Enter your phone number"
+                                class="booking-field"
+                                autocomplete="tel"
+                                required
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="booking-contact-method" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Preferred contact method
+                            </label>
+
+                            <select
+                                id="booking-contact-method"
+                                name="contact_method"
+                                class="booking-field"
+                            >
+                                <option value="">Select preference</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Email">Email</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECTION 2: PICKUP -->
+                <div class="booking-section mb-10">
+
+                    <div class="mb-8 flex items-center gap-4">
+                        <span class="booking-number">02</span>
+
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-cay-primary">
+                                Pickup location
+                            </h3>
+
+                            <p class="mt-1 text-xs text-cay-primary/50">
+                                Where will the move begin?
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-6">
+
+                        <div>
+                            <label for="pickup-address" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Pickup address <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pickup-address"
+                                name="pickup_address"
+                                placeholder="Enter your pickup address"
+                                class="booking-field"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="grid gap-6 sm:grid-cols-2">
+
+                            <div>
+                                <label for="pickup-city" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                    City <span class="text-[#916508]">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="pickup-city"
+                                    name="pickup_city"
+                                    placeholder="Pickup city"
+                                    class="booking-field"
+                                    required
+                                >
+                            </div>
+
+
+                            <div>
+                                <label for="pickup-property" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                    Property type
+                                </label>
+
+                                <select
+                                    id="pickup-property"
+                                    name="pickup_property"
+                                    class="booking-field"
+                                >
+                                    <option value="">Select property type</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">House</option>
+                                    <option value="Office">Office</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECTION 3: DESTINATION -->
+                <div class="booking-section mb-10">
+
+                    <div class="mb-8 flex items-center gap-4">
+                        <span class="booking-number">03</span>
+
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-cay-primary">
+                                Destination
+                            </h3>
+
+                            <p class="mt-1 text-xs text-cay-primary/50">
+                                Where are you moving to?
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="space-y-6">
+
+                        <div>
+                            <label for="destination-address" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Destination address <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="destination-address"
+                                name="destination_address"
+                                placeholder="Enter your destination address"
+                                class="booking-field"
+                                required
+                            >
+                        </div>
+
+
+                        <div class="grid gap-6 sm:grid-cols-2">
+
+                            <div>
+                                <label for="destination-city" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                    City <span class="text-[#916508]">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="destination-city"
+                                    name="destination_city"
+                                    placeholder="Destination city"
+                                    class="booking-field"
+                                    required
+                                >
+                            </div>
+
+
+                            <div>
+                                <label for="destination-property" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                    Destination property type
+                                </label>
+
+                                <select
+                                    id="destination-property"
+                                    name="destination_property"
+                                    class="booking-field"
+                                >
+                                    <option value="">Select property type</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="House">House</option>
+                                    <option value="Office">Office</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECTION 4: MOVING REQUIREMENTS -->
+                <div class="booking-section mb-10">
+
+                    <div class="mb-8 flex items-center gap-4">
+                        <span class="booking-number">04</span>
+
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-cay-primary">
+                                Moving requirements
+                            </h3>
+
+                            <p class="mt-1 text-xs text-cay-primary/50">
+                                Tell us what kind of assistance you need.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+
+                        <div>
+                            <label for="moving-date" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Preferred moving date <span class="text-[#916508]">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="moving-date"
+                                name="moving_date"
+                                class="booking-field"
+                                required
+                            >
+                        </div>
+
+
+                        <div>
+                            <label for="moving-size" class="mb-2 block text-sm font-semibold text-cay-primary">
+                                Move size
+                            </label>
+
+                            <select
+                                id="moving-size"
+                                name="move_size"
+                                class="booking-field"
+                            >
+                                <option value="">Select move size</option>
+                                <option value="Small">Small</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="Not sure">Not sure yet</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="mt-6">
+
+                        <p class="mb-4 text-sm font-semibold text-cay-primary">
+                            Services required <span class="text-[#916508]">*</span>
+                        </p>
+
+                        <div class="grid gap-4 sm:grid-cols-2">
+
+                            <label class="flex cursor-pointer items-start gap-3 border border-cay-primary/10 p-4 transition hover:border-cay-secondary">
+                                <input type="checkbox" name="services" value="Moving assistance" class="mt-1 accent-[#D19611]">
+                                <span class="text-sm text-cay-primary/70">Moving assistance</span>
+                            </label>
+
+                            <label class="flex cursor-pointer items-start gap-3 border border-cay-primary/10 p-4 transition hover:border-cay-secondary">
+                                <input type="checkbox" name="services" value="Packing support" class="mt-1 accent-[#D19611]">
+                                <span class="text-sm text-cay-primary/70">Packing support</span>
+                            </label>
+
+                            <label class="flex cursor-pointer items-start gap-3 border border-cay-primary/10 p-4 transition hover:border-cay-secondary">
+                                <input type="checkbox" name="services" value="Loading and unloading" class="mt-1 accent-[#D19611]">
+                                <span class="text-sm text-cay-primary/70">Loading and unloading</span>
+                            </label>
+
+                            <label class="flex cursor-pointer items-start gap-3 border border-cay-primary/10 p-4 transition hover:border-cay-secondary">
+                                <input type="checkbox" name="services" value="Other" class="mt-1 accent-[#D19611]">
+                                <span class="text-sm text-cay-primary/70">Other assistance</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECTION 5: ADDITIONAL INFORMATION -->
+                <div class="mb-10">
+
+                    <div class="mb-8 flex items-center gap-4">
+                        <span class="booking-number">05</span>
+
+                        <div>
+                            <h3 class="font-display text-lg font-semibold text-cay-primary">
+                                Additional information
+                            </h3>
+
+                            <p class="mt-1 text-xs text-cay-primary/50">
+                                Anything else we should know?
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <label for="booking-message" class="mb-2 block text-sm font-semibold text-cay-primary">
+                            Tell us more
+                        </label>
+
+                        <textarea
+                            id="booking-message"
+                            name="additional_information"
+                            rows="5"
+                            placeholder="Describe your moving requirements, special items or any other relevant details..."
+                            class="booking-field resize-y"
+                        ></textarea>
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+                <div class="border-t border-cay-primary/10 pt-8">
+
+                    <p class="mb-6 text-xs leading-6 text-cay-primary/50">
+                        Submitting this form sends a moving enquiry.
+                        It does not confirm a booking or guarantee availability.
+                    </p>
+
+                    <button
+                        type="submit"
+                        class="gold-button inline-flex w-full items-center justify-center gap-3 px-8 py-4 text-sm font-semibold sm:w-auto"
+                    >
+                        Submit Moving Enquiry
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock content %}
