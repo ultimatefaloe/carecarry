@@ -1,4 +1,4 @@
- 
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <title>{% block title %}Home{% endblock title %} | CareCarry</title>
 
     <meta name="description" content="CareCarry makes moving easier with convenient moving assistance.">
-    <meta name="theme-color" content="#05162D">
+    <meta name="theme-color" content="#FFFFFF">
 
     <!-- Browser Tab Icon -->
     <link
@@ -32,140 +32,634 @@
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
 
+    <!-- GLOBAL LAYOUT STYLES -->
+    <style>
+        :root {
+            --cay-navy: #05162D;
+            --cay-navy-soft: #0B2440;
+            --cay-gold: #D6AD63;
+            --cay-gold-light: #E9C783;
+            --cay-gold-deep: #916508;
+
+            --cay-white: #FFFFFF;
+            --cay-grey: #F5F7FA;
+            --cay-muted: #AEBAC9;
+            --cay-border: #E6EAF0;
+        }
+
+        /* =====================================
+           GLOBAL
+        ===================================== */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cay-white);
+            color: var(--cay-navy);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            background: rgba(255, 255, 255, .96);
+            border-bottom: 1px solid rgba(5, 22, 45, .07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .site-nav {
+            min-height: 86px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .brand-logo img {
+            display: block;
+            width: auto;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        /* =====================================
+           DESKTOP NAVIGATION
+        ===================================== */
+
+        .desktop-navigation {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 9px 0;
+            color: #405067;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .015em;
+            transition: color .25s ease;
+        }
+
+        .nav-link::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            bottom: 1px;
+            width: 0;
+            height: 1.5px;
+            background: var(--cay-gold);
+            transition: width .25s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--cay-navy);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* =====================================
+           BOOKING BUTTON
+        ===================================== */
+
+        .nav-booking-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 13px 21px;
+            border: 1px solid var(--cay-gold);
+            border-radius: 4px;
+            background: var(--cay-gold);
+            color: var(--cay-navy);
+            font-size: 12px;
+            font-weight: 700;
+            transition:
+                background .25s ease,
+                border-color .25s ease,
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .nav-booking-button:hover {
+            background: var(--cay-gold-light);
+            border-color: var(--cay-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 173, 99, .2);
+        }
+
+        .nav-booking-button span {
+            transition: transform .25s ease;
+        }
+
+        .nav-booking-button:hover span {
+            transform: translateX(3px);
+        }
+
+        /* =====================================
+           MOBILE NAVIGATION
+        ===================================== */
+
+        .mobile-navigation {
+            display: none;
+            position: relative;
+        }
+
+        .mobile-menu-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 43px;
+            height: 43px;
+            border: 1px solid var(--cay-border);
+            border-radius: 5px;
+            background: white;
+            color: var(--cay-navy);
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .mobile-menu-trigger::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-menu-trigger svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: calc(100% + 17px);
+            right: 0;
+            width: min(320px, calc(100vw - 32px));
+            padding: 12px;
+            border: 1px solid var(--cay-border);
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 18px 45px rgba(5, 22, 45, .13);
+        }
+
+        .mobile-menu a:not(.mobile-booking-link) {
+            display: block;
+            padding: 14px 13px;
+            border-radius: 4px;
+            color: #405067;
+            font-size: 13px;
+            font-weight: 600;
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .mobile-menu a:not(.mobile-booking-link):hover {
+            background: var(--cay-grey);
+            color: var(--cay-navy);
+        }
+
+        .mobile-booking-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            padding: 14px;
+            border-radius: 4px;
+            background: var(--cay-gold);
+            color: var(--cay-navy);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        .site-footer {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    ellipse at 90% 0%,
+                    rgba(214, 173, 99, .09),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    125deg,
+                    #05162D,
+                    #0B2440
+                );
+            color: white;
+        }
+
+        .footer-top-line {
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--cay-gold),
+                transparent
+            );
+            opacity: .8;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            width: auto;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .footer-heading {
+            margin-bottom: 25px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: .02em;
+        }
+
+        .footer-description {
+            max-width: 340px;
+            color: #B6C2D1;
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: #B6C2D1;
+            font-size: 12px;
+            transition:
+                color .25s ease,
+                transform .25s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--cay-gold-light);
+            transform: translateX(4px);
+        }
+
+        .footer-contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 20px;
+            color: var(--cay-gold-light);
+            font-size: 12px;
+            font-weight: 600;
+            transition: gap .25s ease;
+        }
+
+        .footer-contact-link:hover {
+            gap: 14px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, .12);
+        }
+
+        .footer-bottom p {
+            color: #94A3B8;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .footer-tagline {
+            color: var(--cay-gold-light) !important;
+            letter-spacing: .08em;
+        }
+
+        /* =====================================
+           RESPONSIVE LAYOUT
+        ===================================== */
+
+        @media (max-width: 900px) {
+            .desktop-navigation {
+                gap: 21px;
+            }
+
+            .nav-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .site-nav {
+                min-height: 72px;
+            }
+
+            .brand-logo img {
+                height: 37px;
+            }
+
+            .desktop-navigation {
+                display: none;
+            }
+
+            .mobile-navigation {
+                display: block;
+            }
+
+            .site-footer .footer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-footer .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 38px;
+            }
+
+            .footer-bottom {
+                text-align: center;
+            }
+        }
+
+        /* =====================================
+           ACCESSIBILITY
+        ===================================== */
+
+        a:focus-visible,
+        summary:focus-visible {
+            outline: 2px solid var(--cay-gold-deep);
+            outline-offset: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+
     {% block extra_css %}{% endblock extra_css %}
 </head>
 
+
 <body class="min-h-screen bg-white font-body text-cay-primary antialiased">
 
-   <!-- WEBSITE HEADER -->
-<header class="sticky top-0 z-50 border-b border-cay-primary/10 bg-white/95 backdrop-blur">
-<nav class="page-container flex flex-wrap items-center justify-between gap-10 px-12 py-9 sm:px-14 lg:px-24">
+    <!-- =====================================
+         WEBSITE HEADER
+    ====================================== -->
 
-        <!-- BRAND LOGO -->
-        <a href="{% url 'prototype:home' %}" class="flex shrink-0 items-center" aria-label="CareCarry Home">
-            <img
-                src="{% static 'images/carecarry-logo-header.png' %}"
-                alt="CareCarry Moving Help"
-                class="h-10 w-auto object-contain sm:h-11"
+    <header class="site-header">
+
+        <nav class="site-nav page-container flex items-center justify-between gap-6 px-6 sm:px-10 lg:px-16">
+
+            <!-- BRAND LOGO -->
+            <a
+                href="{% url 'prototype:home' %}"
+                class="brand-logo"
+                aria-label="CareCarry Home"
             >
-        </a>
-
-        <!-- NAVIGATION -->
-        <div class="flex flex-wrap items-center gap-x-10 gap-y-4 text-sm font-medium">
-
-            <a href="{% url 'prototype:home' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                Home
+                <img
+                    src="{% static 'images/carecarry-logo-header.png' %}"
+                    alt="CareCarry Moving Help"
+                >
             </a>
 
-            <a href="{% url 'prototype:services' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                Services
-            </a>
 
-            <a href="{% url 'prototype:how_it_works' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                How It Works
-            </a>
+            <!-- DESKTOP NAVIGATION -->
+            <div class="desktop-navigation">
 
-            <a href="{% url 'prototype:about' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                About
-            </a>
+                <a href="{% url 'prototype:home' %}" class="nav-link">
+                    Home
+                </a>
 
-            <a href="{% url 'prototype:contact' %}" class="nav-link text-cay-primary transition hover:text-cay-secondary">
-                Contact
-            </a>
+                <a href="{% url 'prototype:services' %}" class="nav-link">
+                    Services
+                </a>
 
-            <a href="{% url 'prototype:book_move' %}" class="btn btn-secondary ml-2 px-7 py-3.5">
-                Book a Move
-            </a>
+                <a href="{% url 'prototype:how_it_works' %}" class="nav-link">
+                    How It Works
+                </a>
 
-        </div>
+                <a href="{% url 'prototype:about' %}" class="nav-link">
+                    About
+                </a>
 
-    </nav>
+                <a href="{% url 'prototype:contact' %}" class="nav-link">
+                    Contact
+                </a>
 
-</header>
+                <a
+                    href="{% url 'prototype:book_move' %}"
+                    class="nav-booking-button"
+                >
+                    Book a Move
+                    <span aria-hidden="true">→</span>
+                </a>
 
-    <!-- MAIN PAGE CONTENT -->
+            </div>
+
+
+            <!-- MOBILE NAVIGATION -->
+            <details class="mobile-navigation">
+
+                <summary
+                    class="mobile-menu-trigger"
+                    aria-label="Toggle navigation menu"
+                >
+                    <svg
+                        class="menu-open-icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                    >
+                        <path d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                </summary>
+
+                <div class="mobile-menu">
+
+                    <a href="{% url 'prototype:home' %}">
+                        Home
+                    </a>
+
+                    <a href="{% url 'prototype:services' %}">
+                        Services
+                    </a>
+
+                    <a href="{% url 'prototype:how_it_works' %}">
+                        How It Works
+                    </a>
+
+                    <a href="{% url 'prototype:about' %}">
+                        About
+                    </a>
+
+                    <a href="{% url 'prototype:contact' %}">
+                        Contact
+                    </a>
+
+                    <a
+                        href="{% url 'prototype:book_move' %}"
+                        class="mobile-booking-link"
+                    >
+                        Book a Move →
+                    </a>
+
+                </div>
+
+            </details>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN PAGE CONTENT
+    ====================================== -->
+
     <main>
         {% block content %}
         {% endblock content %}
     </main>
 
-    <!-- WEBSITE FOOTER -->
-    <footer class="border-t border-cay-primary/10 bg-[#F7F5F0]">
+
+    <!-- =====================================
+         WEBSITE FOOTER
+    ====================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-top-line"></div>
 
         <div class="page-container px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
 
-            <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
+            <div class="footer-grid grid gap-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-16">
+
 
                 <!-- BRAND INFORMATION -->
                 <div>
 
-                    <a href="{% url 'prototype:home' %}" class="inline-block" aria-label="CareCarry Home">
+                    <a
+                        href="{% url 'prototype:home' %}"
+                        class="footer-logo"
+                        aria-label="CareCarry Home"
+                    >
                         <img
                             src="{% static 'images/carecarry-logo.png' %}"
                             alt="CareCarry Moving Help"
-                            class="h-10 w-auto object-contain sm:h-11"
                         >
                     </a>
 
-                    <p class="mt-6 max-w-sm text-sm leading-7 text-cay-primary/60">
+                    <p class="footer-description mt-6">
                         Making your moving experience simpler,
                         smoother and more convenient.
                     </p>
 
                 </div>
 
+
                 <!-- QUICK LINKS -->
                 <div>
 
-                    <h3 class="font-display text-base font-semibold text-cay-primary">
-                        Quick Links
+                    <h3 class="footer-heading">
+                        Explore CareCarry
                     </h3>
 
-                    <div class="mt-6 flex flex-col items-start gap-4 text-sm text-cay-primary/60">
+                    <div class="footer-links">
 
-                        <a href="{% url 'prototype:home' %}" class="transition hover:text-cay-secondary">Home</a>
+                        <a href="{% url 'prototype:home' %}">
+                            Home
+                        </a>
 
-                        <a href="{% url 'prototype:services' %}" class="transition hover:text-cay-secondary">Services</a>
+                        <a href="{% url 'prototype:services' %}">
+                            Our Services
+                        </a>
 
-                        <a href="{% url 'prototype:how_it_works' %}" class="transition hover:text-cay-secondary">How It Works</a>
+                        <a href="{% url 'prototype:how_it_works' %}">
+                            How It Works
+                        </a>
 
-                        <a href="{% url 'prototype:about' %}" class="transition hover:text-cay-secondary">About Us</a>
+                        <a href="{% url 'prototype:about' %}">
+                            About Us
+                        </a>
 
-                        <a href="{% url 'prototype:contact' %}" class="transition hover:text-cay-secondary">Contact</a>
+                        <a href="{% url 'prototype:contact' %}">
+                            Contact Us
+                        </a>
 
                     </div>
 
                 </div>
 
+
                 <!-- CONTACT -->
                 <div>
 
-                    <h3 class="font-display text-base font-semibold text-cay-primary">
-                        Get in Touch
+                    <h3 class="footer-heading">
+                        Let's Get Moving
                     </h3>
 
-                    <p class="mt-6 max-w-sm text-sm leading-7 text-cay-primary/60">
+                    <p class="footer-description">
                         Have a question or planning a move?
                         We'd be happy to hear from you.
                     </p>
 
-                    <a href="{% url 'prototype:book_move' %}" class="mt-4 inline-block text-sm font-semibold text-cay-secondary transition hover:text-cay-primary">
-                        Request a Quote →
+                    <a
+                        href="{% url 'prototype:book_move' %}"
+                        class="footer-contact-link"
+                    >
+                        Request a Quote
+                        <span aria-hidden="true">→</span>
                     </a>
 
                 </div>
 
+
             </div>
 
+
             <!-- COPYRIGHT -->
-            <div class="mt-16 border-t border-cay-primary/10 pt-8 text-center text-xs text-cay-primary/40">
+            <div class="footer-bottom mt-16 flex flex-col items-center justify-between gap-4 pt-8 sm:flex-row">
 
                 <p>
                     © {% now "Y" %} CareCarry. All rights reserved.
                 </p>
 
-                <p class="mt-3 text-cay-primary/60">
-                    Your Move. Our Care. Every Step.
+                <p class="footer-tagline">
+                    YOUR MOVE. OUR CARE. EVERY STEP.
                 </p>
 
             </div>
@@ -174,6 +668,8 @@
 
     </footer>
 
+
+    <!-- PAGE-SPECIFIC JAVASCRIPT -->
     {% block extra_js %}{% endblock extra_js %}
 
 </body>

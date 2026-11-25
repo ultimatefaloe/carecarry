@@ -1,3 +1,4 @@
+
 {% extends "root-layout.html" %}
 {% load static %}
 
@@ -5,456 +6,1276 @@
 
 {% block extra_css %}
 <style>
+    :root {
+        --care-navy: #05162D;
+        --care-navy-light: #0B2440;
+        --care-gold: #D6AD63;
+        --care-gold-light: #E9C783;
+        --care-gold-dark: #916508;
+        --care-white: #FFFFFF;
+        --care-grey: #F5F7FA;
+        --care-text: #253449;
+        --care-muted: #657286;
+        --care-border: #E6EAF0;
+    }
+
+    .about-page {
+        overflow: hidden;
+        color: var(--care-text);
+    }
+
+    .about-container {
+        width: min(100% - 3rem, 1240px);
+        margin-inline: auto;
+    }
+
     .about-eyebrow {
-        letter-spacing: .22em;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
     }
 
-    .about-rule {
-        width: 48px;
-        height: 2px;
-        background: #D19611;
+    .about-eyebrow::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: currentColor;
     }
 
-    .about-cta {
+    .about-gold {
+        color: var(--care-gold-dark);
+    }
+
+    .about-gold-light {
+        color: var(--care-gold);
+    }
+
+    .about-heading {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -.045em;
+    }
+
+    .about-copy {
+        color: var(--care-muted);
+        font-size: 14px;
+        line-height: 2;
+    }
+
+    .about-button {
+        min-height: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 0 25px;
+        background: var(--care-gold);
+        color: var(--care-navy);
+        font-size: 13px;
+        font-weight: 700;
+        transition: .25s ease;
+    }
+
+    .about-button:hover {
+        background: var(--care-gold-light);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(214,173,99,.18);
+    }
+
+    .about-button span {
+        font-size: 18px;
+        transition: transform .25s ease;
+    }
+
+    .about-button:hover span {
+        transform: translateX(4px);
+    }
+
+    .about-outline-button {
+        min-height: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 25px;
+        border: 1px solid rgba(255,255,255,.35);
+        color: white;
+        font-size: 13px;
+        font-weight: 600;
+        transition: .25s ease;
+    }
+
+    .about-outline-button:hover {
+        border-color: var(--care-gold);
+        color: var(--care-gold-light);
+        background: rgba(255,255,255,.04);
+    }
+
+    /* HERO */
+    .about-hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
         background:
-            radial-gradient(ellipse at 90% 50%, rgba(209, 150, 17, .10), transparent 40%),
-            #05162D;
+            radial-gradient(ellipse at 82% 45%, rgba(214,173,99,.12), transparent 38%),
+            linear-gradient(115deg, #05162D 0%, #0B2440 100%);
+        color: white;
+    }
+
+    .about-hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        opacity: .12;
+        background-image:
+            linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size: 65px 65px;
+        mask-image: linear-gradient(to right, transparent, black);
+    }
+
+    .about-hero-inner {
+        min-height: 650px;
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        align-items: center;
+        gap: 65px;
+        padding-block: 100px;
+    }
+
+    .about-hero-copy {
+        max-width: 620px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .about-hero-eyebrow {
+        color: var(--care-gold);
+    }
+
+    .about-hero-title {
+        margin-top: 30px;
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(3rem, 5.2vw, 5rem);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -.06em;
+    }
+
+    .about-hero-title span {
+        color: var(--care-gold);
+    }
+
+    .about-hero-description {
+        max-width: 500px;
+        margin-top: 25px;
+        color: #C2CCDA;
+        font-size: 15px;
+        line-height: 2;
+    }
+
+    .about-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 35px;
+    }
+
+    .about-tagline {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin-top: 45px;
+        padding-top: 25px;
+        border-top: 1px solid rgba(255,255,255,.13);
+        color: #B9C5D4;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+    }
+
+    .about-tagline::before {
+        content: "";
+        width: 30px;
+        height: 1px;
+        background: var(--care-gold);
+    }
+
+    /* ABSTRACT HERO VISUAL */
+    .about-visual {
+        position: relative;
+        width: 100%;
+        max-width: 540px;
+        margin-inline: auto;
+    }
+
+    .about-visual::before {
+        content: "";
+        position: absolute;
+        width: 80%;
+        aspect-ratio: 1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: rgba(214,173,99,.10);
+        filter: blur(90px);
+    }
+
+    .about-visual-card {
+        position: relative;
+        z-index: 1;
+        padding: 35px;
+        border: 1px solid rgba(255,255,255,.13);
+        background: rgba(255,255,255,.045);
+        backdrop-filter: blur(12px);
+    }
+
+    .about-visual-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+        color: var(--care-gold);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+    }
+
+    .about-visual-dot {
+        width: 7px;
+        height: 7px;
+        flex-shrink: 0;
+        background: var(--care-gold);
+        box-shadow: 0 0 15px rgba(214,173,99,.6);
+    }
+
+    .about-visual-art {
+        position: relative;
+        height: 255px;
+        margin-top: 25px;
+    }
+
+    .visual-square {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid;
+    }
+
+    .visual-square-one {
+        left: 5%;
+        bottom: 0;
+        width: 125px;
+        height: 125px;
+        border-color: rgba(214,173,99,.65);
+        background: rgba(214,173,99,.10);
+    }
+
+    .visual-square-two {
+        right: 5%;
+        bottom: 0;
+        width: 145px;
+        height: 145px;
+        border-color: rgba(255,255,255,.3);
+        background: rgba(255,255,255,.055);
+    }
+
+    .visual-square-three {
+        left: 50%;
+        bottom: 95px;
+        width: 105px;
+        height: 105px;
+        transform: translateX(-50%);
+        border-color: rgba(214,173,99,.7);
+        background: rgba(214,173,99,.16);
+    }
+
+    .visual-square::before,
+    .visual-square::after {
+        content: "";
+        position: absolute;
+        background: rgba(214,173,99,.3);
+    }
+
+    .visual-square::before {
+        width: 1px;
+        height: 100%;
+    }
+
+    .visual-square::after {
+        width: 100%;
+        height: 1px;
+    }
+
+    .visual-square-two::before,
+    .visual-square-two::after {
+        background: rgba(255,255,255,.2);
+    }
+
+    .about-visual-footer {
+        margin-top: 25px;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255,255,255,.12);
+        color: #C2CCDA;
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    /* COMPANY */
+    .about-company {
+        padding-block: 110px;
+        background: white;
+    }
+
+    .company-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 100px;
+    }
+
+    .company-title {
+        max-width: 540px;
+        margin-top: 22px;
+        color: var(--care-navy);
+    }
+
+    .company-copy p + p {
+        margin-top: 17px;
+    }
+
+    .about-text-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        margin-top: 27px;
+        color: var(--care-navy);
+        font-size: 13px;
+        font-weight: 700;
+        transition: .25s ease;
+    }
+
+    .about-text-link span {
+        color: var(--care-gold-dark);
+        font-size: 18px;
+        transition: transform .25s ease;
+    }
+
+    .about-text-link:hover {
+        color: var(--care-gold-dark);
+    }
+
+    .about-text-link:hover span {
+        transform: translateX(5px);
+    }
+
+    /* COMPANY VISUAL */
+    .company-visual {
+        position: relative;
+        padding: 0 12px 12px 0;
+    }
+
+    .company-visual-frame {
+        position: relative;
+        min-height: 420px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 35px;
+        background:
+            linear-gradient(135deg, rgba(255,255,255,.3), transparent),
+            #EDF1F7;
+    }
+
+    .company-visual-frame::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: .35;
+        background-image:
+            linear-gradient(135deg, transparent 49.5%, #D6DDE8 50%, transparent 50.5%);
+        background-size: 40px 40px;
+    }
+
+    .company-visual-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .company-brand-panel {
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(214,173,99,.5);
+        background: #FBF8F1;
+    }
+
+    .company-brand-name {
+        color: var(--care-navy);
+        font-family: 'Poppins', sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -.05em;
+    }
+
+    .company-brand-name span {
+        color: var(--care-gold-dark);
+    }
+
+    .company-visual-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .company-visual-item {
+        min-height: 115px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--care-border);
+        background: white;
+        color: var(--care-navy);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+    }
+
+    .company-visual-caption {
+        margin-top: 20px;
+        color: var(--care-muted);
+        font-size: 10px;
+        letter-spacing: .18em;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .company-corner {
+        position: absolute;
+        width: 85px;
+        height: 85px;
+        border-color: var(--care-gold);
+        border-style: solid;
+        pointer-events: none;
+    }
+
+    .company-corner-top {
+        top: -10px;
+        left: -10px;
+        border-width: 2px 0 0 2px;
+    }
+
+    .company-corner-bottom {
+        right: 0;
+        bottom: 0;
+        border-width: 0 2px 2px 0;
+    }
+
+    /* MISSION AND VISION */
+    .purpose-section {
+        padding-block: 110px;
+        background: var(--care-grey);
+    }
+
+    .purpose-grid {
+        display: grid;
+        grid-template-columns: .8fr 1.2fr;
+        gap: 90px;
+    }
+
+    .purpose-intro {
+        position: sticky;
+        top: 120px;
+        align-self: start;
+    }
+
+    .purpose-title {
+        margin-top: 22px;
+        color: var(--care-navy);
+    }
+
+    .purpose-description {
+        margin-top: 22px;
+    }
+
+    .purpose-item {
+        padding-bottom: 42px;
+        border-bottom: 1px solid #DCE2E9;
+    }
+
+    .purpose-item + .purpose-item {
+        margin-top: 42px;
+    }
+
+    .purpose-label {
+        color: var(--care-gold-dark);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+    }
+
+    .purpose-item h3 {
+        max-width: 700px;
+        margin-top: 22px;
+        color: var(--care-navy);
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1.5rem, 3vw, 2.3rem);
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -.035em;
+    }
+
+    .purpose-item p {
+        max-width: 650px;
+        margin-top: 18px;
+    }
+
+    .purpose-item:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    /* VALUES */
+    .values-section {
+        padding-block: 110px;
+        background: white;
+    }
+
+    .values-heading {
+        max-width: 650px;
+    }
+
+    .values-title {
+        margin-top: 22px;
+        color: var(--care-navy);
+    }
+
+    .values-description {
+        margin-top: 20px;
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 25px;
+        margin-top: 65px;
+    }
+
+    .value-card {
+        padding: 28px 22px 25px;
+        border: 1px solid var(--care-border);
+        border-top: 2px solid var(--care-gold);
+        background: white;
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(5,22,45,.07);
+    }
+
+    .value-number {
+        color: var(--care-gold-dark);
+        font-family: 'Poppins', sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -.05em;
+    }
+
+    .value-card h3 {
+        margin-top: 23px;
+        color: var(--care-navy);
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .value-card p {
+        margin-top: 12px;
+        color: var(--care-muted);
+        font-size: 13px;
+        line-height: 1.9;
+    }
+
+    /* APPROACH */
+    .approach-section {
+        position: relative;
+        overflow: hidden;
+        padding-block: 110px;
+        background:
+            radial-gradient(ellipse at 90% 15%, rgba(214,173,99,.10), transparent 35%),
+            var(--care-navy);
+    }
+
+    .approach-grid {
+        display: grid;
+        grid-template-columns: .9fr 1.1fr;
+        align-items: center;
+        gap: 100px;
+    }
+
+    .approach-title {
+        margin-top: 22px;
+        color: white;
+    }
+
+    .approach-description {
+        margin-top: 22px;
+        color: #B9C5D4;
+    }
+
+    .approach-step {
+        display: flex;
+        gap: 25px;
+        padding-block: 27px;
+        border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .approach-step:first-child {
+        padding-top: 0;
+    }
+
+    .approach-step:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    .approach-number {
+        flex-shrink: 0;
+        color: var(--care-gold);
+        font-family: 'Poppins', sans-serif;
+        font-size: 25px;
+        font-weight: 600;
+    }
+
+    .approach-step h3 {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .approach-step p {
+        margin-top: 8px;
+        color: #B9C5D4;
+        font-size: 13px;
+        line-height: 1.9;
+    }
+
+    /* CTA */
+    .about-cta {
+        position: relative;
+        overflow: hidden;
+        padding-block: 90px;
+        background:
+            radial-gradient(ellipse at 90% 50%, rgba(214,173,99,.11), transparent 40%),
+            var(--care-navy);
+    }
+
+    .about-cta-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 45px;
+    }
+
+    .about-cta-title {
+        max-width: 720px;
+        margin-top: 20px;
+        color: white;
+    }
+
+    .about-cta-description {
+        margin-top: 18px;
+        color: #B9C5D4;
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .about-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+        .about-hero-inner {
+            gap: 35px;
+        }
+
+        .company-grid,
+        .approach-grid {
+            gap: 55px;
+        }
+
+        .purpose-grid {
+            gap: 55px;
+        }
+
+        .values-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 767px) {
+        .about-container {
+            width: min(100% - 2.5rem, 600px);
+        }
+
+        .about-hero-inner {
+            min-height: auto;
+            grid-template-columns: 1fr;
+            gap: 45px;
+            padding-block: 80px 75px;
+        }
+
+        .about-hero-title {
+            font-size: clamp(2.8rem, 11vw, 4rem);
+        }
+
+        .about-hero-description {
+            font-size: 14px;
+        }
+
+        .about-visual {
+            max-width: 500px;
+        }
+
+        .about-company,
+        .purpose-section,
+        .values-section,
+        .approach-section {
+            padding-block: 80px;
+        }
+
+        .company-grid,
+        .purpose-grid,
+        .approach-grid {
+            grid-template-columns: 1fr;
+            gap: 45px;
+        }
+
+        .purpose-intro {
+            position: static;
+        }
+
+        .company-visual-frame {
+            min-height: 350px;
+        }
+
+        .values-grid {
+            gap: 18px;
+            margin-top: 45px;
+        }
+
+        .about-cta {
+            padding-block: 75px;
+        }
+
+        .about-cta-inner {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .about-hero-inner {
+            padding-block: 70px 60px;
+        }
+
+        .about-hero-actions {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .about-hero-actions a {
+            width: 100%;
+        }
+
+        .about-visual-card {
+            padding: 22px;
+        }
+
+        .about-visual-art {
+            height: 215px;
+        }
+
+        .visual-square-one {
+            width: 100px;
+            height: 100px;
+        }
+
+        .visual-square-two {
+            width: 115px;
+            height: 115px;
+        }
+
+        .visual-square-three {
+            bottom: 80px;
+            width: 85px;
+            height: 85px;
+        }
+
+        .company-visual-frame {
+            min-height: 310px;
+            padding: 22px;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .value-card {
+            padding: 25px;
+        }
+
+        .about-cta-actions {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .about-cta-actions a {
+            width: 100%;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .about-button,
+        .about-outline-button,
+        .about-button span,
+        .about-text-link,
+        .about-text-link span,
+        .value-card {
+            transition: none !important;
+        }
+
+        .about-button:hover,
+        .value-card:hover {
+            transform: none;
+        }
     }
 </style>
 {% endblock extra_css %}
 
 
 {% block content %}
+<div class="about-page">
 
-<!-- ==========================================
-     HERO
-=========================================== -->
-<section class="relative overflow-hidden bg-[#05162D]">
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="about-container about-hero-inner">
 
-    <div class="page-container grid items-center gap-16 px-6 py-24 sm:px-10 lg:min-h-[680px] lg:grid-cols-2 lg:gap-12 lg:px-16 lg:py-32">
+            <div class="about-hero-copy">
 
-        <!-- HERO CONTENT -->
-        <div class="relative z-10 max-w-2xl">
-
-            <div class="mb-8 flex items-center gap-4">
-                <span class="h-px w-12 bg-[#E6AE2D]"></span>
-                <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
+                <span class="about-eyebrow about-hero-eyebrow">
                     About CareCarry
                 </span>
+
+                <h1 class="about-hero-title">
+                    A better way to
+                    <span class="block">move forward.</span>
+                </h1>
+
+                <p class="about-hero-description">
+                    Moving is a significant transition. We're here to make
+                    the practical side of it easier to navigate through
+                    thoughtful, dependable moving assistance.
+                </p>
+
+                <div class="about-hero-actions">
+
+                    <a href="{% url 'prototype:book_move' %}" class="about-button">
+                        Book a Move
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a href="{% url 'prototype:services' %}" class="about-outline-button">
+                        Our Services
+                    </a>
+
+                </div>
+
+                <div class="about-tagline">
+                    Your Move. Our Care. Every Step.
+                </div>
+
             </div>
 
-            <h1 class="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-                A better way to
-                <span class="block text-[#D19611]">move forward.</span>
-            </h1>
 
-            <p class="mt-8 max-w-xl text-base leading-8 text-slate-200 sm:text-lg sm:leading-9">
-                Moving is a significant transition. We're here to make
-                the practical side of it easier to navigate through
-                thoughtful, dependable moving assistance.
-            </p>
+            <!-- ABSTRACT VISUAL -->
+            <div class="about-visual">
 
-            <div class="mt-10 flex flex-wrap items-center gap-5">
+                <div class="about-visual-card">
 
-                <a href="{% url 'prototype:book_move' %}"
-                   class="gold-button inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold">
-                    Book a Move
+                    <div class="about-visual-top">
+                        <span>The CareCarry Approach</span>
+                        <span class="about-visual-dot"></span>
+                    </div>
+
+                    <div class="about-visual-art">
+
+                        <div class="visual-square visual-square-one"></div>
+
+                        <div class="visual-square visual-square-two"></div>
+
+                        <div class="visual-square visual-square-three"></div>
+
+                    </div>
+
+                    <div class="about-visual-footer">
+                        Every move deserves thoughtful attention.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- THE COMPANY -->
+    <section class="about-company">
+        <div class="about-container company-grid">
+
+            <div>
+
+                <span class="about-eyebrow about-gold">
+                    01 / The Company
+                </span>
+
+                <h2 class="about-heading company-title">
+                    Moving is more than
+                    <span class="about-gold">transportation.</span>
+                </h2>
+
+                <div class="company-copy mt-7">
+
+                    <p class="about-copy">
+                        At CareCarry, we recognise that moving involves more
+                        than getting belongings from one location to another.
+                        It requires preparation, coordination and attention
+                        to the details that matter.
+                    </p>
+
+                    <p class="about-copy">
+                        We focus on providing practical moving assistance
+                        that helps individuals and households manage the
+                        different demands of relocation.
+                    </p>
+
+                </div>
+
+                <a href="{% url 'prototype:services' %}" class="about-text-link">
+                    Discover what we do
                     <span aria-hidden="true">→</span>
                 </a>
 
-                <a href="{% url 'prototype:services' %}"
-                   class="outline-button inline-flex items-center gap-3 px-8 py-4 text-sm font-medium">
-                    Our Services
-                </a>
-
             </div>
 
-            <div class="mt-14 flex items-center gap-4 border-t border-white/10 pt-8">
-                <span class="h-px w-10 bg-[#D19611]"></span>
-                <span class="text-xs font-medium uppercase tracking-[0.18em] text-slate-300">
-                    Your Move. Our Care. Every Step.
-                </span>
-            </div>
 
-        </div>
+            <div class="company-visual">
 
+                <div class="company-corner company-corner-top"></div>
 
-        <!-- ABSTRACT VISUAL -->
-        <div class="relative mx-auto w-full max-w-[560px] lg:max-w-none">
+                <div class="company-visual-frame">
 
-            <div class="absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cay-secondary/10 blur-[110px]"></div>
+                    <div class="company-visual-content">
 
-            <div class="relative z-10 border border-white/10 bg-white/[0.04] p-8 backdrop-blur-sm sm:p-10">
-
-                <div class="mb-10 flex items-center justify-between">
-                    <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
-                        The CareCarry Approach
-                    </span>
-                    <span class="h-2 w-2 shrink-0 bg-[#D19611]"></span>
-                </div>
-
-                <div class="relative mx-auto flex h-52 items-end justify-center sm:h-64">
-
-                    <div class="absolute bottom-0 left-[5%] h-28 w-28 border border-[#E6AE2D]/50 bg-[#D19611]/10 sm:h-32 sm:w-32">
-                        <div class="absolute left-1/2 top-0 h-full w-px bg-[#E6AE2D]/30"></div>
-                        <div class="absolute left-0 top-1/2 h-px w-full bg-[#E6AE2D]/30"></div>
-                    </div>
-
-                    <div class="absolute bottom-0 right-[5%] h-32 w-32 border border-white/30 bg-white/[0.06] sm:h-40 sm:w-40">
-                        <div class="absolute left-1/2 top-0 h-full w-px bg-white/20"></div>
-                        <div class="absolute left-0 top-1/2 h-px w-full bg-white/20"></div>
-                    </div>
-
-                    <div class="absolute bottom-28 left-1/2 h-24 w-24 -translate-x-1/2 border border-[#E6AE2D]/60 bg-[#D19611]/15 sm:bottom-32 sm:h-28 sm:w-28">
-                        <div class="absolute left-1/2 top-0 h-full w-px bg-[#E6AE2D]/30"></div>
-                        <div class="absolute left-0 top-1/2 h-px w-full bg-[#E6AE2D]/30"></div>
-                    </div>
-
-                </div>
-
-                <div class="mt-10 border-t border-white/10 pt-6">
-                    <p class="text-sm leading-7 text-slate-300">
-                        Every move deserves thoughtful attention.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="absolute bottom-0 left-0 h-px w-full bg-cay-secondary/40"></div>
-
-</section>
-
-
-<!-- ==========================================
-     THE COMPANY
-=========================================== -->
-<section class="bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-
-    <div class="page-container grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-24">
-
-        <div>
-            <span class="text-xs font-semibold uppercase about-eyebrow text-[#916508]">
-                01 / The Company
-            </span>
-
-            <h2 class="mt-6 max-w-xl font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl lg:text-5xl">
-                Moving is more than
-                <span class="gold-highlight">transportation.</span>
-            </h2>
-
-            <p class="mt-7 text-sm leading-8 text-cay-primary/70 sm:text-base">
-                At CareCarry, we recognise that moving involves more
-                than getting belongings from one location to another.
-                It requires preparation, coordination and attention
-                to the details that matter.
-            </p>
-
-            <p class="mt-5 text-sm leading-8 text-cay-primary/70 sm:text-base">
-                We focus on providing practical moving assistance
-                that helps individuals and households manage the
-                different demands of relocation.
-            </p>
-
-            <a href="{% url 'prototype:services' %}"
-               class="mt-8 inline-flex items-center gap-3 text-sm font-semibold text-cay-primary transition hover:gap-4 hover:text-[#916508]">
-                Discover what we do
-                <span aria-hidden="true">→</span>
-            </a>
-        </div>
-
-
-        <div class="relative">
-
-            <div class="pointer-events-none absolute -left-4 -top-4 h-20 w-20 border-l-2 border-t-2 border-[#D19611] sm:-left-6 sm:-top-6 sm:h-24 sm:w-24"></div>
-
-            <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-[#EDF1F7] p-6 sm:min-h-[440px] sm:p-10">
-
-                <div class="absolute inset-0 opacity-40"
-                     style="background-image: linear-gradient(135deg, transparent 49.5%, #D6DDE8 50%, transparent 50.5%); background-size: 40px 40px;">
-                </div>
-
-                <div class="relative z-10 w-full max-w-sm">
-
-                    <div class="mb-4 flex h-24 items-center justify-center border border-[#D19611]/40 bg-[#FBF1DC] sm:h-28">
-                        <span class="font-display text-2xl font-bold text-cay-primary">
-                            Care<span class="text-[#D19611]">Carry</span>
-                        </span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                        <div class="flex h-24 items-center justify-center border border-cay-primary/10 bg-white sm:h-32">
-                            <span class="text-[10px] font-semibold uppercase tracking-widest text-cay-primary/60 sm:text-xs">Preparation</span>
+                        <div class="company-brand-panel">
+                            <span class="company-brand-name">
+                                Care<span>Carry</span>
+                            </span>
                         </div>
-                        <div class="flex h-24 items-center justify-center border border-cay-primary/10 bg-white sm:h-32">
-                            <span class="text-[10px] font-semibold uppercase tracking-widest text-cay-primary/60 sm:text-xs">Assistance</span>
+
+                        <div class="company-visual-items">
+
+                            <div class="company-visual-item">
+                                Preparation
+                            </div>
+
+                            <div class="company-visual-item">
+                                Assistance
+                            </div>
+
                         </div>
+
+                        <p class="company-visual-caption">
+                            Moving support, with care.
+                        </p>
+
                     </div>
 
-                    <p class="mt-5 text-center text-[10px] uppercase tracking-[0.2em] text-cay-primary/50 sm:mt-6 sm:text-xs">
-                        Moving support, with care.
-                    </p>
-
                 </div>
+
+                <div class="company-corner company-corner-bottom"></div>
+
             </div>
 
-            <div class="pointer-events-none absolute -bottom-4 -right-4 h-16 w-16 bg-[#D19611] sm:-bottom-5 sm:-right-5 sm:h-20 sm:w-20"></div>
-
         </div>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ==========================================
-     MISSION & VISION
-=========================================== -->
-<section class="bg-[#F7F5F0] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+    <!-- MISSION & VISION -->
+    <section class="purpose-section">
+        <div class="about-container purpose-grid">
 
-    <div class="page-container grid gap-12 lg:grid-cols-12 lg:gap-20">
+            <div class="purpose-intro">
 
-        <div class="lg:col-span-4">
-            <span class="text-xs font-semibold uppercase about-eyebrow text-[#916508]">
-                02 / Our Purpose
-            </span>
-
-            <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-cay-primary sm:text-4xl">
-                The reason behind
-                <span class="gold-highlight">what we do.</span>
-            </h2>
-
-            <p class="mt-6 text-sm leading-8 text-cay-primary/65">
-                Our purpose is rooted in a simple idea: moving
-                should feel more manageable.
-            </p>
-        </div>
-
-
-        <div class="space-y-14 lg:col-span-8">
-
-            <div class="border-b border-cay-primary/10 pb-12">
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-[#916508]">
-                    Our Mission
+                <span class="about-eyebrow about-gold">
+                    02 / Our Purpose
                 </span>
 
-                <h3 class="mt-6 font-display text-2xl font-semibold leading-tight text-cay-primary sm:text-3xl lg:text-4xl">
-                    To simplify moving through practical assistance and thoughtful service.
-                </h3>
+                <h2 class="about-heading purpose-title">
+                    The reason behind
+                    <span class="about-gold">what we do.</span>
+                </h2>
 
-                <p class="mt-6 max-w-2xl text-sm leading-8 text-cay-primary/70 sm:text-base">
-                    We aim to support customers through the demands
-                    of relocation by making essential moving tasks
-                    easier to approach, organise and manage.
+                <p class="about-copy purpose-description">
+                    Our purpose is rooted in a simple idea: moving
+                    should feel more manageable.
                 </p>
+
             </div>
 
 
             <div>
-                <span class="text-xs font-semibold uppercase tracking-[0.2em] text-[#916508]">
-                    Our Vision
-                </span>
 
-                <h3 class="mt-6 font-display text-2xl font-semibold leading-tight text-cay-primary sm:text-3xl">
-                    A more convenient and considered moving experience.
-                </h3>
+                <article class="purpose-item">
 
-                <p class="mt-6 max-w-2xl text-sm leading-8 text-cay-primary/70 sm:text-base">
-                    We aspire to contribute to a moving experience
-                    where people can approach each transition with
-                    greater clarity, confidence and support.
-                </p>
+                    <span class="purpose-label">Our Mission</span>
+
+                    <h3>
+                        To simplify moving through practical assistance
+                        and thoughtful service.
+                    </h3>
+
+                    <p class="about-copy">
+                        We aim to support customers through the demands
+                        of relocation by making essential moving tasks
+                        easier to approach, organise and manage.
+                    </p>
+
+                </article>
+
+
+                <article class="purpose-item">
+
+                    <span class="purpose-label">Our Vision</span>
+
+                    <h3>
+                        A more convenient and considered moving experience.
+                    </h3>
+
+                    <p class="about-copy">
+                        We aspire to contribute to a moving experience
+                        where people can approach each transition with
+                        greater clarity, confidence and support.
+                    </p>
+
+                </article>
+
             </div>
 
         </div>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ==========================================
-     VALUES
-=========================================== -->
-<section class="bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
+    <!-- VALUES -->
+    <section class="values-section">
+        <div class="about-container">
 
-    <div class="page-container">
+            <div class="values-heading">
 
-        <div class="flex flex-col justify-between gap-10 sm:flex-row sm:items-end">
-
-            <div class="max-w-xl">
-                <span class="text-xs font-semibold uppercase about-eyebrow text-[#916508]">
+                <span class="about-eyebrow about-gold">
                     03 / Our Values
                 </span>
 
-                <h2 class="mt-6 font-display text-3xl font-semibold text-cay-primary sm:text-4xl">
+                <h2 class="about-heading values-title">
                     What guides the
-                    <span class="gold-highlight">way we work.</span>
+                    <span class="about-gold">way we work.</span>
                 </h2>
 
-                <p class="mt-6 text-sm leading-8 text-cay-primary/65">
+                <p class="about-copy values-description">
                     Our values shape the way we approach moving
                     assistance and the standards we aim to uphold.
                 </p>
+
             </div>
 
-        </div>
 
+            <div class="values-grid">
 
-        <div class="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-
-            <article class="border-t-2 border-cay-secondary/40 pt-8">
-                <span class="font-display text-4xl font-bold text-cay-secondary">01</span>
-                <h3 class="mt-6 font-display text-lg font-semibold text-cay-primary">Care</h3>
-                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    We recognise the importance of people's belongings
-                    and the personal nature of every move.
-                </p>
-            </article>
-
-            <article class="border-t-2 border-cay-secondary/40 pt-8">
-                <span class="font-display text-4xl font-bold text-cay-secondary">02</span>
-                <h3 class="mt-6 font-display text-lg font-semibold text-cay-primary">Responsibility</h3>
-                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    We believe in approaching every responsibility
-                    with attention and consideration.
-                </p>
-            </article>
-
-            <article class="border-t-2 border-cay-secondary/40 pt-8">
-                <span class="font-display text-4xl font-bold text-cay-secondary">03</span>
-                <h3 class="mt-6 font-display text-lg font-semibold text-cay-primary">Organisation</h3>
-                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    We value planning and structure as important
-                    parts of a manageable moving experience.
-                </p>
-            </article>
-
-            <article class="border-t-2 border-cay-secondary/40 pt-8">
-                <span class="font-display text-4xl font-bold text-cay-secondary">04</span>
-                <h3 class="mt-6 font-display text-lg font-semibold text-cay-primary">Customer Focus</h3>
-                <p class="mt-4 text-sm leading-7 text-cay-primary/65">
-                    We recognise that every customer has different
-                    needs, priorities and expectations.
-                </p>
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ==========================================
-     OUR APPROACH
-=========================================== -->
-<section class="bg-[#05162D] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-
-    <div class="page-container grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
-
-        <div>
-            <span class="text-xs font-semibold uppercase about-eyebrow text-[#E6AE2D]">
-                04 / Our Approach
-            </span>
-
-            <h2 class="mt-6 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
-                Thoughtful support, from
-                <span class="gold-highlight">one step to the next.</span>
-            </h2>
-
-            <p class="mt-6 max-w-lg text-sm leading-8 text-slate-300 sm:text-base">
-                We believe a more manageable move begins with
-                understanding what needs to be done. Our approach
-                centres on practical support, clear expectations
-                and attention to the customer's needs.
-            </p>
-        </div>
-
-
-        <div>
-
-            <div class="flex gap-6 border-b border-white/10 py-8">
-                <span class="shrink-0 font-display text-2xl font-bold text-[#E6AE2D]">01</span>
-                <div>
-                    <h3 class="font-display font-semibold text-white">Understand</h3>
-                    <p class="mt-2 text-sm leading-7 text-slate-300">
-                        Begin with the customer's moving requirements and priorities.
+                <article class="value-card">
+                    <span class="value-number">01</span>
+                    <h3>Care</h3>
+                    <p>
+                        We recognise the importance of people's belongings
+                        and the personal nature of every move.
                     </p>
-                </div>
-            </div>
+                </article>
 
-            <div class="flex gap-6 border-b border-white/10 py-8">
-                <span class="shrink-0 font-display text-2xl font-bold text-[#E6AE2D]">02</span>
-                <div>
-                    <h3 class="font-display font-semibold text-white">Consider</h3>
-                    <p class="mt-2 text-sm leading-7 text-slate-300">
-                        Identify the practical assistance that may be needed.
+                <article class="value-card">
+                    <span class="value-number">02</span>
+                    <h3>Responsibility</h3>
+                    <p>
+                        We believe in approaching every responsibility
+                        with attention and consideration.
                     </p>
-                </div>
-            </div>
+                </article>
 
-            <div class="flex gap-6 py-8">
-                <span class="shrink-0 font-display text-2xl font-bold text-[#E6AE2D]">03</span>
-                <div>
-                    <h3 class="font-display font-semibold text-white">Assist</h3>
-                    <p class="mt-2 text-sm leading-7 text-slate-300">
-                        Focus on the moving tasks that matter throughout the process.
+                <article class="value-card">
+                    <span class="value-number">03</span>
+                    <h3>Organisation</h3>
+                    <p>
+                        We value planning and structure as important
+                        parts of a manageable moving experience.
                     </p>
-                </div>
+                </article>
+
+                <article class="value-card">
+                    <span class="value-number">04</span>
+                    <h3>Customer Focus</h3>
+                    <p>
+                        We recognise that every customer has different
+                        needs, priorities and expectations.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- OUR APPROACH -->
+    <section class="approach-section">
+        <div class="about-container approach-grid">
+
+            <div>
+
+                <span class="about-eyebrow about-gold-light">
+                    04 / Our Approach
+                </span>
+
+                <h2 class="about-heading approach-title">
+                    Thoughtful support, from
+                    <span class="about-gold-light">one step to the next.</span>
+                </h2>
+
+                <p class="about-copy approach-description">
+                    We believe a more manageable move begins with
+                    understanding what needs to be done. Our approach
+                    centres on practical support, clear expectations
+                    and attention to the customer's needs.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <article class="approach-step">
+                    <span class="approach-number">01</span>
+                    <div>
+                        <h3>Understand</h3>
+                        <p>
+                            Begin with the customer's moving requirements
+                            and priorities.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="approach-step">
+                    <span class="approach-number">02</span>
+                    <div>
+                        <h3>Consider</h3>
+                        <p>
+                            Identify the practical assistance that may be needed.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="approach-step">
+                    <span class="approach-number">03</span>
+                    <div>
+                        <h3>Assist</h3>
+                        <p>
+                            Focus on the moving tasks that matter throughout
+                            the process.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FINAL CTA -->
+    <section class="about-cta">
+
+        <div class="about-container about-cta-inner">
+
+            <div>
+
+                <span class="about-eyebrow about-gold-light">
+                    Ready when you are
+                </span>
+
+                <h2 class="about-heading about-cta-title">
+                    Your next chapter deserves
+                    <span class="about-gold-light">a thoughtful start.</span>
+                </h2>
+
+                <p class="about-cta-description">
+                    Explore how CareCarry can support the practical
+                    side of your next move.
+                </p>
+
+            </div>
+
+
+            <div class="about-cta-actions">
+
+                <a href="{% url 'prototype:services' %}" class="about-outline-button">
+                    Our Services
+                </a>
+
+                <a href="{% url 'prototype:contact' %}" class="about-button">
+                    Contact Us
+                    <span aria-hidden="true">→</span>
+                </a>
+
             </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
-
-
-<!-- ==========================================
-     FINAL CTA
-=========================================== -->
-<section class="about-cta relative overflow-hidden px-6 py-24 sm:px-10 lg:px-16 lg:py-28">
-
-    <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cay-secondary/10 blur-[100px]"></div>
-
-    <div class="page-container relative z-10 flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
-
-        <div>
-            <span class="text-xs font-semibold uppercase tracking-[.22em] text-[#E6AE2D]">
-                Ready when you are
-            </span>
-
-            <h2 class="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Your next chapter deserves
-                <span class="gold-highlight">a thoughtful start.</span>
-            </h2>
-
-            <p class="mt-6 max-w-xl text-sm leading-7 text-slate-300">
-                Explore how CareCarry can support the practical side of your next move.
-            </p>
-        </div>
-
-        <div class="flex flex-wrap gap-5">
-
-            <a href="{% url 'prototype:services' %}"
-               class="outline-button inline-flex shrink-0 items-center gap-3 px-8 py-4 text-sm font-medium">
-                Our Services
-            </a>
-
-            <a href="{% url 'prototype:contact' %}"
-               class="gold-button inline-flex shrink-0 items-center gap-3 px-8 py-4 text-sm font-semibold">
-                Contact Us
-                <span aria-hidden="true">→</span>
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
+</div>
 {% endblock content %}
