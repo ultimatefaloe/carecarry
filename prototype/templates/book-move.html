@@ -218,12 +218,18 @@
         border: 1px solid var(--care-border);
         background: #fff;
         padding: 15px 16px;
-        transition: border-color .2s ease, background-color .2s ease;
+        transition:
+            border-color .25s ease,
+            background-color .25s ease,
+            transform .25s ease,
+            box-shadow .25s ease;
     }
 
     .booking-option:hover {
         border-color: rgba(214,173,99,.75);
         background: #FCFAF6;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(5,22,45,.045);
     }
 
     .booking-option input,
@@ -244,6 +250,14 @@
     .booking-special-box {
         border: 1px solid var(--care-border);
         padding: 18px;
+        transition:
+            border-color .25s ease,
+            box-shadow .25s ease;
+    }
+
+    .booking-special-box:focus-within {
+        border-color: var(--care-gold);
+        box-shadow: 0 0 0 3px rgba(214,173,99,.08);
     }
 
     /* SUMMARY */
@@ -258,6 +272,25 @@
     .booking-submit {
         width: 100%;
         justify-content: center;
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease,
+            opacity .25s ease;
+    }
+
+    .booking-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(145,101,8,.16);
+    }
+
+    .booking-submit:active {
+        transform: translateY(0);
+    }
+
+    .booking-submit:disabled {
+        cursor: not-allowed;
+        opacity: .7;
+        transform: none;
     }
 
     /* CLOSING CTA */
@@ -266,6 +299,116 @@
         background:
             radial-gradient(circle at 90% 50%, rgba(214,173,99,.09), transparent 30%),
             var(--care-navy);
+    }
+
+    /* =====================================
+       ANIMATIONS
+    ===================================== */
+
+    @keyframes bookingFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes bookingFadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes bookingSlideLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-35px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes bookingSlideRight {
+        from {
+            opacity: 0;
+            transform: translateX(35px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Hero entrance */
+
+    .booking-hero .booking-sidebar-rule,
+    .booking-hero .booking-eyebrow {
+        animation: bookingFadeUp .7s ease both;
+    }
+
+    .booking-hero-title {
+        animation: bookingFadeUp .85s ease .12s both;
+    }
+
+    .booking-hero p {
+        animation: bookingFadeUp .85s ease .25s both;
+    }
+
+    .booking-hero .mt-10 {
+        animation: bookingFadeIn 1s ease .5s both;
+    }
+
+    /* Main content entrance */
+
+    .booking-sidebar {
+        animation: bookingSlideLeft .8s ease both;
+    }
+
+    .booking-form-panel {
+        animation: bookingSlideRight .8s ease both;
+    }
+
+    /* Scroll reveal */
+
+    .booking-reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+            opacity .7s ease,
+            transform .7s ease;
+    }
+
+    .booking-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* CTA entrance */
+
+    .booking-cta .page-container {
+        animation: bookingFadeUp .8s ease both;
+    }
+
+    .booking-cta a {
+        transition:
+            transform .25s ease,
+            background-color .25s ease;
+    }
+
+    .booking-cta a:hover {
+        transform: translateY(-3px);
     }
 
     /* RESPONSIVE */
@@ -334,9 +477,26 @@
         }
     }
 
+    /* ACCESSIBILITY */
+
     @media (prefers-reduced-motion: reduce) {
         .booking-field,
-        .booking-option {
+        .booking-option,
+        .booking-submit,
+        .booking-cta a {
+            transition: none !important;
+        }
+
+        .booking-hero *,
+        .booking-sidebar,
+        .booking-form-panel,
+        .booking-cta .page-container {
+            animation: none !important;
+        }
+
+        .booking-reveal {
+            opacity: 1;
+            transform: none;
             transition: none;
         }
     }
@@ -892,7 +1052,7 @@
                                     </span>
                                 </label>
 
-                                <div class="mt-5">
+                                <div class="mt-5" id="piano-quantity-container">
                                     <label for="piano-quantity" class="booking-label text-xs">
                                         Number of pianos
                                     </label>
@@ -1123,8 +1283,8 @@
                         type="submit"
                         class="gold-button booking-submit inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold sm:w-auto"
                     >
-                        Request My Care Team
-                        <span aria-hidden="true">→</span>
+                        <span id="submit-text">Request My Care Team</span>
+                        <span id="submit-arrow" aria-hidden="true">→</span>
                     </button>
 
                 </div>
@@ -1176,3 +1336,146 @@
 </section>
 
 {% endblock content %}
+
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================
+       SCROLL REVEAL ANIMATIONS
+    ===================================== */
+
+    const revealElements = document.querySelectorAll(
+        ".booking-section, .booking-summary"
+    );
+
+    // Respect users who prefer reduced motion.
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
+
+        revealElements.forEach(function (element) {
+            element.classList.add("booking-reveal");
+        });
+
+        const observer = new IntersectionObserver(
+            function (entries, observer) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(function (element) {
+            observer.observe(element);
+        });
+
+    }
+
+
+    /* =====================================
+       MINIMUM MOVING DATE
+    ===================================== */
+
+    const movingDate = document.getElementById("moving-date");
+
+    if (movingDate) {
+
+        const today = new Date();
+
+        const localDate = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        movingDate.min = localDate;
+
+    }
+
+
+    /* =====================================
+       PIANO QUANTITY VISIBILITY
+    ===================================== */
+
+    const pianoCheckbox = document.querySelector(
+        'input[name="special_items"][value="Piano"]'
+    );
+
+    const pianoQuantity = document.getElementById("piano-quantity");
+
+    const pianoContainer = document.getElementById(
+        "piano-quantity-container"
+    );
+
+    if (pianoCheckbox && pianoQuantity && pianoContainer) {
+
+        function togglePianoQuantity() {
+
+            pianoContainer.hidden = !pianoCheckbox.checked;
+
+            pianoQuantity.required = pianoCheckbox.checked;
+
+            if (!pianoCheckbox.checked) {
+                pianoQuantity.value = "";
+            }
+
+        }
+
+        pianoCheckbox.addEventListener(
+            "change",
+            togglePianoQuantity
+        );
+
+        togglePianoQuantity();
+
+    }
+
+
+    /* =====================================
+       BOOKING FORM SUBMISSION FEEDBACK
+    ===================================== */
+
+    const bookingForm = document.querySelector(".booking-form");
+
+    const submitButton = bookingForm
+        ? bookingForm.querySelector('button[type="submit"]')
+        : null;
+
+    const submitText = document.getElementById("submit-text");
+
+    const submitArrow = document.getElementById("submit-arrow");
+
+    if (bookingForm && submitButton) {
+
+        bookingForm.addEventListener("submit", function () {
+
+            // Native browser validation happens before this event.
+            submitButton.disabled = true;
+
+            if (submitText) {
+                submitText.textContent = "Submitting Request...";
+            }
+
+            if (submitArrow) {
+                submitArrow.textContent = "✓";
+            }
+
+        });
+
+    }
+
+});
+</script>
+{% endblock extra_js %}

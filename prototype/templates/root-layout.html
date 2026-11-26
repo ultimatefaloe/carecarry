@@ -494,6 +494,8 @@
                 <summary
                     class="mobile-menu-trigger"
                     aria-label="Toggle navigation menu"
+                    aria-controls="mobile-menu-panel"
+                    aria-expanded="false"
                 >
                     <svg
                         class="menu-open-icon"
@@ -508,7 +510,7 @@
                     </svg>
                 </summary>
 
-                <div class="mobile-menu">
+                <div class="mobile-menu" id="mobile-menu-panel">
 
                     <a href="{% url 'prototype:home' %}">
                         Home
@@ -667,6 +669,69 @@
         </div>
 
     </footer>
+
+
+    <!-- =====================================
+         GLOBAL JAVASCRIPT
+    ====================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // =====================================
+            // MOBILE NAVIGATION
+            // =====================================
+
+            const mobileNavigation = document.querySelector(".mobile-navigation");
+            const mobileMenuTrigger = document.querySelector(".mobile-menu-trigger");
+            const mobileMenu = document.querySelector(".mobile-menu");
+
+            if (mobileNavigation && mobileMenuTrigger && mobileMenu) {
+
+                // Update accessibility state
+                function updateMenuState() {
+                    mobileMenuTrigger.setAttribute(
+                        "aria-expanded",
+                        mobileNavigation.open ? "true" : "false"
+                    );
+                }
+
+                // Listen for menu opening and closing
+                mobileNavigation.addEventListener("toggle", updateMenuState);
+
+                // Close menu after selecting a navigation link
+                mobileMenu.querySelectorAll("a").forEach(function (link) {
+                    link.addEventListener("click", function () {
+                        mobileNavigation.open = false;
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener("click", function (event) {
+                    if (
+                        mobileNavigation.open &&
+                        !mobileNavigation.contains(event.target)
+                    ) {
+                        mobileNavigation.open = false;
+                    }
+                });
+
+                // Close menu when pressing Escape
+                document.addEventListener("keydown", function (event) {
+                    if (
+                        event.key === "Escape" &&
+                        mobileNavigation.open
+                    ) {
+                        mobileNavigation.open = false;
+                        mobileMenuTrigger.focus();
+                    }
+                });
+
+                updateMenuState();
+            }
+
+        });
+    </script>
 
 
     <!-- PAGE-SPECIFIC JAVASCRIPT -->
